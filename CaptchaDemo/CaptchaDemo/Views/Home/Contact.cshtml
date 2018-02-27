@@ -1,0 +1,43 @@
+﻿@using CaptchaDemo.HtmlHlper
+@model CaptchaDemo.Models.ContactViewMode
+@{
+	ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<address>
+	One Microsoft Way<br />
+	Redmond, WA 98052-6399<br />
+	<abbr title="Phone">P:</abbr>
+	425.555.0100
+</address>
+
+<address>
+	<strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+	<strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+
+
+@using (Html.BeginForm("Contact", "Home",
+	new { id = "MyIdValue" },
+	FormMethod.Post))
+{
+	<div class="form-group">
+		@Html.LabelFor(m => m.Title)
+		@Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.Page)
+		@Html.TextBoxFor(m => m.Page, new { @class = "form-control" })
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.Captcha)
+		@Html.TextBoxFor(m => m.Captcha, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Captcha)
+	</div>
+
+	<button class="btn btn-info"></button>
+}
+
+@Html.CaptchaFor(m => m.Captcha, new { @class = "form-control" })
