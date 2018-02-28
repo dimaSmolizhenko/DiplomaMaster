@@ -6,5 +6,6 @@ namespace CaptchaDemo.IoC.Resolver
 	public interface ICaptchaResolverFactory
 	{
 		ICapthcaService GetServiceByType(CaptchaTypes type);
+		T ResolveService<T>();
 	}
 }

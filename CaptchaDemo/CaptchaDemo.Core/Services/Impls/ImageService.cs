@@ -48,7 +48,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 			var filePath = _storageKeyProvider.GetFilePath(config.CaptchaType, ImageFormat.Png);
 
-			SaveImage(bitmap, filePath);
+			SaveImage(bitmap, filePath, ImageFormat.Png);
 
 			return _storageKeyProvider.GetFileName(filePath);
 		}

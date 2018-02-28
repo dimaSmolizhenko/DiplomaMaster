@@ -29,12 +29,13 @@ namespace CaptchaDemo.IoC
 			var container = builder.Build();
 
 			DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-			//DependencyResolver.SetResolver(new CaptchaResolverFactory(container));
 		}
 
 		private static void RegisterTypes(ContainerBuilder builder)
 		{
 			builder.RegisterType<GameWordsService>().Keyed<ICapthcaService>(CaptchaTypes.GameWords);
+
+			builder.RegisterType<CaptchaResolverFactory>().As<ICaptchaResolverFactory>();
 
 			builder.RegisterType<DbConfiguration>().As<IDbConfiguration>();
 			builder.RegisterType<StorageKeyProvider>().As<IStorageKeyProvider>();

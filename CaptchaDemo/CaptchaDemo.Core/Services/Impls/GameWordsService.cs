@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CaptchaDemo.Core.Models;
+using CaptchaDemo.Data.BussinessModels;
 using CaptchaDemo.Data.Entities;
 using CaptchaDemo.Data.Enum;
 using CaptchaDemo.Data.Repositories;
@@ -17,16 +17,18 @@ namespace CaptchaDemo.Core.Services.Impls
 		private readonly IRepository<Question> _repository;
 		private readonly IImageService _imageService;
 		private readonly IFileService _fileService;
+		private readonly IStorageKeyProvider _storageKeyProvider;
 
 		#endregion
 
 		#region .ctor
 
-		public GameWordsService(IRepository<Question> repository, IImageService imageService, IFileService fileService)
+		public GameWordsService(IRepository<Question> repository, IImageService imageService, IFileService fileService, IStorageKeyProvider storageKeyProvider)
 		{
 			_repository = repository;
 			_imageService = imageService;
 			_fileService = fileService;
+			_storageKeyProvider = storageKeyProvider;
 		}
 
 		#endregion
@@ -40,7 +42,7 @@ namespace CaptchaDemo.Core.Services.Impls
 			return Contains(question.Answers, answers);
 		}
 
-		public async Task<Question> GetCapthaAsync()
+		public async Task<QuestionModel> GetCapthaAsync()
 		{
 			var words = _fileService.GetWordsFromFile();
 			var questionText = JoinRandomChars(words);
@@ -49,7 +51,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 			await _repository.InsertAsync(question);
 
-			return question;
+			return MapQuestionToQuestionModel(question);
 		}
 
 		#endregion
@@ -101,7 +103,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 			stringBuilder.Append(RandomChars(3));
 
-			return stringBuilder.ToString();
+			return stringBuilder.ToString().ToLowerInvariant();
 		}
 
 		private Question CreateQuestion(IEnumerable<string> words, string imageUrl, string questionText)
@@ -112,6 +114,18 @@ namespace CaptchaDemo.Core.Services.Impls
 				Answers = words.ToArray(),
 				Text = questionText,
 				Type = CaptchaTypes.GameWords.ToString()
+			};
+		}
+
+		private QuestionModel MapQuestionToQuestionModel(Question question)
+		{
+			return new QuestionModel
+			{
+				QuestionId = question.Id,
+				Text = question.Text,
+				Type = question.Type,
+				Answers = question.Answers.Select(x => x).ToArray(),
+				ImageUrl = _storageKeyProvider.GetWebFilePath(question.Type, question.ImageUrl)
 			};
 		}
 

@@ -40,7 +40,7 @@ namespace CaptchaDemo.Core.Services.Impls
 		public string GetFilePath(string captchaType, ImageFormat format)
 		{
 			var path = GetCaptchaFSPath(captchaType);
-			var fileName = $"{Guid.NewGuid()}.{format}";
+			var fileName = $"{Guid.NewGuid()}.{format.ToString().ToLowerInvariant()}";
 			return string.Concat(path, fileName);
 		}
 
@@ -54,19 +54,53 @@ namespace CaptchaDemo.Core.Services.Impls
 			return _captchaConfiguration.FilePathToPDF;
 		}
 
+		public string GetWebFilePath(string captchaType, string fileName)
+		{
+			return CombineWebPath(captchaType, fileName);
+		}
+
 		#endregion
 
 		#region Private Methods
 
-		private string GetCaptchaFSPath(string capthcaType)
+		private string GetCaptchaFSPath(string captchaType)
 		{
-			var directoryPath = $"{_captchaConfiguration.StoragePath}\\{capthcaType}\\";
+			var directoryPath = GetCaptchaFSDirectory(captchaType);
 			if (!Directory.Exists(directoryPath))
 			{
 				Directory.CreateDirectory(directoryPath);
 			}
 
 			return directoryPath;
+		}
+
+		private string GetCaptchaFSDirectory(string captchaType)
+		{
+			return FormatFSLink(
+				$"{_captchaConfiguration.FileStoragePath}{_captchaConfiguration.WebStoragePath}\\{captchaType}\\");
+		}
+
+		private string CombineWebPath(params string[] pathes)
+		{
+			return FormatWebLink($"{Path.Combine(_captchaConfiguration.WebStoragePath, Path.Combine(pathes))}");
+		}
+
+		private string FormatWebLink(string path)
+		{
+			if (!string.IsNullOrEmpty(path))
+			{
+				return path.Replace(@"\", "/");
+			}
+			return path;
+		}
+
+		private string FormatFSLink(string path)
+		{
+			if (!string.IsNullOrEmpty(path))
+			{
+				return path.Replace("/", @"\");
+			}
+			return path;
 		}
 
 		#endregion

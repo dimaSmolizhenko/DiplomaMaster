@@ -1,4 +1,5 @@
-﻿@using CaptchaDemo.HtmlHlper
+﻿@using CaptchaDemo.Data.Enum
+@using CaptchaDemo.HtmlHlper
 @model CaptchaDemo.Models.ContactViewMode
 @{
 	ViewBag.Title = "Contact";
@@ -33,11 +34,9 @@
 	</div>
 	<div class="form-group">
 		@Html.LabelFor(m => m.Captcha)
-		@Html.TextBoxFor(m => m.Captcha, new { @class = "form-control" })
+		@Html.CaptchaFor(m => m.Captcha, CaptchaTypes.GameWords, new { @class = "form-control captcha-text-field" })
 		@Html.ValidationMessageFor(m => m.Captcha)
 	</div>
 
-	<button class="btn btn-info"></button>
+	<button class="btn btn-info">Send</button>
 }
-
-@Html.CaptchaFor(m => m.Captcha, new { @class = "form-control" })

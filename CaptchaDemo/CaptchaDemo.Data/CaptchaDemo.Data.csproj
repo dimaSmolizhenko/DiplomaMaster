@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BussinessModels\QuestionModel.cs" />
     <Compile Include="CommonMemebers\Impls\Entity.cs" />
     <Compile Include="Consts\DbConsts.cs" />
     <Compile Include="Entities\Question.cs" />

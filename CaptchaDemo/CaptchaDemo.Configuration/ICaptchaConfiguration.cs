@@ -2,7 +2,8 @@
 {
 	public interface ICaptchaConfiguration
 	{
-		string StoragePath { get; }
+		string FileStoragePath { get; }
 		string FilePathToPDF { get; }
+		string WebStoragePath { get; }
 	}
 }

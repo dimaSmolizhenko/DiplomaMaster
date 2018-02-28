@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 
@@ -52,9 +53,14 @@ namespace CaptchaDemo.Core.Services.Impls
 			while (word.Length < 4)
 			{
 				var number = random.Next(0, words.Count);
-				if (!captchaList.Contains(words[number]))
+				var randomWord = words[number];
+				if (!captchaList.Contains(randomWord))
 				{
-					word = words[number];
+					var randomWords = SplitCamelCase(words[number]);
+					if (randomWords.Length == 1)
+					{
+						word = words[number];
+					}
 				}
 			}
 
@@ -72,6 +78,11 @@ namespace CaptchaDemo.Core.Services.Impls
 			var separators = new[] { ' ', '.', ',', '!', '?', '(', ')', '\n', '\r', '\t', ';', '{', '}', '[', ']', ':' };
 
 			return pageText.Split(separators);
+		}
+
+		public string[] SplitCamelCase(string source)
+		{
+			return Regex.Split(source, @"(?<!^)(?=[A-Z])");
 		}
 
 		#endregion

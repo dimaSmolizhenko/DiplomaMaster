@@ -4,3 +4,4 @@ CaptchaDemo/.vs/CaptchaDemo/v15/Server/sqlite3/storage.ide
 CaptchaDemo/.vs/CaptchaDemo/v15/Server/sqlite3/db.lock
 CaptchaDemo/.vs/CaptchaDemo/v15/.suo
 CaptchaDemo/CaptchaDemo/CaptchaDemo.Web.csproj.user
+CaptchaDemo/CaptchaDemo/storage/

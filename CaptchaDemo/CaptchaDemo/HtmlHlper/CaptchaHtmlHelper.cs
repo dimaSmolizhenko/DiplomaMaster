@@ -1,80 +1,94 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using System.Web.Routing;
+using CaptchaDemo.Core.Services;
+using CaptchaDemo.Data.BussinessModels;
+using CaptchaDemo.Data.Entities;
 using CaptchaDemo.Data.Enum;
+using CaptchaDemo.IoC.Resolver;
 
 namespace CaptchaDemo.HtmlHlper
 {
 	public static class CaptchaHtmlHelper
 	{
-
-		public static IHtmlString Captcha(this HtmlHelper htmlHelper, string name, string refreshLabel)
+		public static IHtmlString Captcha(this HtmlHelper htmlHelper, string name, CaptchaTypes type, string refreshLabel)
 		{
-			return Captcha(htmlHelper, name, refreshLabel);
+			return Captcha(htmlHelper, name, type, refreshLabel, null);
 		}
 
-		public static IHtmlString Captcha(this HtmlHelper htmlHelper, string name, object htmlAttributes)
+		public static IHtmlString Captcha(this HtmlHelper htmlHelper, string name, CaptchaTypes type, object htmlAttributes)
 		{
-			return Captcha(htmlHelper, name, null, htmlAttributes);
+			return Captcha(htmlHelper, name, type, null, htmlAttributes);
 		}
 
-		public static IHtmlString Captcha(this HtmlHelper htmlHelper, string name, string refreshLabel, object htmlAttributes)
+		public static IHtmlString Captcha(this HtmlHelper htmlHelper, string name, CaptchaTypes type, string refreshLabel, object htmlAttributes)
 		{
-			return CaptchaHelper(htmlHelper, name,  refreshLabel, null);
+			return CaptchaHelper(htmlHelper, name, type,  refreshLabel, htmlAttributes);
 		}
 
-		public static IHtmlString CaptchaFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
+		public static IHtmlString CaptchaFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, CaptchaTypes type)
 		{
-			return CaptchaFor(htmlHelper, expression, null);
-		}
-
-		public static IHtmlString CaptchaFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, 
-			object htmlAttributes)
-		{
-			return CaptchaFor(htmlHelper, expression, null, htmlAttributes);
-		}
-
-		public static IHtmlString CaptchaFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression,
-			 string refreshLabel)
-		{
-			return CaptchaFor(htmlHelper, expression,  refreshLabel, null);
+			return CaptchaFor(htmlHelper, expression,type, null);
 		}
 
 		public static IHtmlString CaptchaFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, 
-			string refreshLabel, object htmlAttributes)
+			CaptchaTypes type, object htmlAttributes)
 		{
-			return CaptchaHelper(htmlHelper, ExpressionHelper.GetExpressionText(expression), refreshLabel, htmlAttributes);
+			return CaptchaFor(htmlHelper, expression, type, null, htmlAttributes);
 		}
 
-		private static IHtmlString CaptchaHelper(this HtmlHelper htmlHelper, string name, string refreshLabel, object htmlAttributes)
+		public static IHtmlString CaptchaFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, 
+			CaptchaTypes type, string refreshLabel)
+		{
+			return CaptchaFor(htmlHelper, expression, type,  refreshLabel, null);
+		}
+
+		public static IHtmlString CaptchaFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, 
+			CaptchaTypes type, string refreshLabel, object htmlAttributes)
+		{
+			return CaptchaHelper(htmlHelper, ExpressionHelper.GetExpressionText(expression), type, refreshLabel, htmlAttributes);
+		}
+
+		private static IHtmlString CaptchaHelper(this HtmlHelper htmlHelper, string name, CaptchaTypes type, string refreshLabel, object htmlAttributes)
 		{
 			var container = new TagBuilder("div");
 			container.MergeAttribute("class", "captcha-container");
 
+			var question = GetQuestion(type);
+
+			var context = HttpContext.Current; //TODO: to sessionProvider
+			context.Session["CaptchaGuid"] = question.QuestionId;
+			context.Session["CaptchaType"] = type;
+
 			var image = new TagBuilder("img");
-			image.MergeAttribute("src", "../storage/GameWords/847520d4-c130-43df-a909-76d5ff831088.png");
-			image.MergeAttribute("border", "0");
-			image.MergeAttribute("class","captcha-image");
+			image.MergeAttribute("src", question.ImageUrl);
+			image.MergeAttribute("class", "captcha-image");
 
 			container.InnerHtml = image.ToString(TagRenderMode.SelfClosing);
 
-			var refresh = new TagBuilder("a");
+			var refresh = new TagBuilder("a"); //TODO: add refresh captcha
 			refresh.MergeAttribute("href", "javascript:void(0)");
 			refresh.MergeAttribute("class", "refresh-captcha");
 			refresh.SetInnerText(refreshLabel);
-
-			//var br = new TagBuilder("br");
 
 			var textBox = htmlHelper.TextBox(name, "", htmlAttributes);
 
 			return new HtmlString(
 				container.ToString(TagRenderMode.Normal) + Environment.NewLine +
 				refresh.ToString(TagRenderMode.Normal) + Environment.NewLine +
-				//br.ToString(TagRenderMode.SelfClosing) + Environment.NewLine +
 				textBox + Environment.NewLine);
+		}
+
+		private static QuestionModel GetQuestion(CaptchaTypes type)
+		{
+			var captchaResolverFactory = new CaptchaResolverFactory();
+			var captchaService = captchaResolverFactory.GetServiceByType(type);
+			var question = Task.Run(async () => await captchaService.GetCapthaAsync()).Result;
+
+			return question;
 		}
 
 	}

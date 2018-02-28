@@ -4,8 +4,10 @@
 	{
 		public static string MongoDbConfigurationName => "MongoDb";
 
-		public const string CaptchaStoragePath = "storagePath";
+		public const string CaptchaFileStoragePath = "fileStoragePath";
 
 		public const string CaptchaFilePath = "filePathToPDF";
+
+		public const string CaptchaWebStoragePath = "webStoragePath";
 	}
 }

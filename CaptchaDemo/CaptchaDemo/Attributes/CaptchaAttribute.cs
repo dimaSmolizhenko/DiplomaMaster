@@ -5,7 +5,9 @@ using System.Web;
 using CaptchaDemo.Configuration.Impls;
 using CaptchaDemo.Core.Services.Impls;
 using CaptchaDemo.Data.Entities;
+using CaptchaDemo.Data.Enum;
 using CaptchaDemo.Data.Repositories;
+using CaptchaDemo.IoC.Resolver;
 
 namespace CaptchaDemo.Attributes
 {
@@ -16,14 +18,16 @@ namespace CaptchaDemo.Attributes
 			if (value != null)
 			{
 				var captchaWords = value.ToString().Split(' ');
-				var context = HttpContext.Current;
+				var context = HttpContext.Current; //TODO: to sessionProvider
 				var guid = context.Session["CaptchaGuid"].ToString();
+				var type = (CaptchaTypes)context.Session["CaptchaType"];
+
 				if (captchaWords.Any() && !string.IsNullOrEmpty(guid))
 				{
-					//var captchaService = new GameWordsService(new Repository<Question>(new DbConfiguration(), "Question"));
-					//var isValid = Task.Run(async () => await captchaService.ValidateCaptchaAsync(guid, captchaWords)).Result; 
-					//return isValid;
-					return true;
+					var captchaResolverFactory = new CaptchaResolverFactory();
+					var captchaService = captchaResolverFactory.GetServiceByType(type);
+					var isValid = Task.Run(async () => await captchaService.ValidateCaptchaAsync(guid, captchaWords)).Result; 
+					return isValid;
 				}
 
 			}
