@@ -63,11 +63,20 @@ namespace CaptchaDemo.HtmlHlper
 			context.Session["CaptchaGuid"] = question.QuestionId;
 			context.Session["CaptchaType"] = type;
 
+			if (type != CaptchaTypes.GameWords)
+			{
+				var span = new TagBuilder("div");
+				span.MergeAttribute("class", "captcha-label");
+				span.SetInnerText(question.Text);
+				container.InnerHtml += span.ToString(TagRenderMode.Normal);
+			}
+
 			var image = new TagBuilder("img");
 			image.MergeAttribute("src", question.ImageUrl);
-			image.MergeAttribute("class", "captcha-image");
+			var className = type == CaptchaTypes.RebusMath ? "type-math" : "";
+			image.MergeAttribute("class", $"captcha-image {className}");
 
-			container.InnerHtml = image.ToString(TagRenderMode.SelfClosing);
+			container.InnerHtml += image.ToString(TagRenderMode.SelfClosing);
 
 			var refresh = new TagBuilder("a"); //TODO: add refresh captcha
 			refresh.MergeAttribute("href", "javascript:void(0)");

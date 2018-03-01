@@ -75,7 +75,12 @@ namespace CaptchaDemo.Core.Services.Impls
 			var pageNumber = random.Next(0, reader.NumberOfPages);
 
 			var pageText = PdfTextExtractor.GetTextFromPage(reader, pageNumber);
-			var separators = new[] { ' ', '.', ',', '!', '?', '(', ')', '\n', '\r', '\t', ';', '{', '}', '[', ']', ':' };
+
+			var separators = new[]
+			{
+				' ', '.', ',', '!', '?', '(', ')', '\n', '\r', '\t', ';', '{', '}', '[', ']', ':', '=', '+', '*', '/', '>', '<',
+				'%', '$', '@', '"', '\'', '_', '-', '`', '~' , '|', '\\', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+			};
 
 			return pageText.Split(separators);
 		}
@@ -83,6 +88,11 @@ namespace CaptchaDemo.Core.Services.Impls
 		public string[] SplitCamelCase(string source)
 		{
 			return Regex.Split(source, @"(?<!^)(?=[A-Z])");
+		}
+
+		public string[] SplitCamelCaseAndNumbers(string source)
+		{
+			return Regex.Split(source, @"(\d+|[A-Za-z]+)");
 		}
 
 		#endregion

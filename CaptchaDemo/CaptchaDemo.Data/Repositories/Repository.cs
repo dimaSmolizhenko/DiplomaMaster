@@ -37,6 +37,12 @@ namespace CaptchaDemo.Data.Repositories
 			return await _collection.AsQueryable().FirstOrDefaultAsync(t => t.Id.Equals(id));
 		}
 
+		public async Task<IList<T>> GetByTypeAsync(string type)
+		{
+			var filter = new BsonDocument("Type", type);
+			return await _collection.Find(filter).ToListAsync();
+		}
+
 		public async Task<IEnumerable<T>> GetAllAsync()
 		{
 			var builder = new FilterDefinitionBuilder<T>();

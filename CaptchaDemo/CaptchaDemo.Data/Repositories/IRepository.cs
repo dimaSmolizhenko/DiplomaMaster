@@ -11,5 +11,6 @@ namespace CaptchaDemo.Data.Repositories
 		Task InsertManyAsync(IEnumerable<T> entities);
 		Task UpdateAsync(T entity);
 		Task DeleteAsync(string id);
+		Task<IList<T>> GetByTypeAsync(string type);
 	}
 }

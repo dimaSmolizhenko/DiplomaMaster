@@ -51,6 +51,8 @@
     <Compile Include="Services\ICapthcaService.cs" />
     <Compile Include="Services\IFileService.cs" />
     <Compile Include="Services\IImageService.cs" />
+    <Compile Include="Services\Impls\CaptchaMathService.cs" />
+    <Compile Include="Services\Impls\BaseCaptchaService.cs" />
     <Compile Include="Services\Impls\FileService.cs" />
     <Compile Include="Services\Impls\GameWordsService.cs" />
     <Compile Include="Services\Impls\ImageService.cs" />

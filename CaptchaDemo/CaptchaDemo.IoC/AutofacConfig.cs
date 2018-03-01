@@ -34,6 +34,7 @@ namespace CaptchaDemo.IoC
 		private static void RegisterTypes(ContainerBuilder builder)
 		{
 			builder.RegisterType<GameWordsService>().Keyed<ICapthcaService>(CaptchaTypes.GameWords);
+			builder.RegisterType<CaptchaMathService>().Keyed<ICapthcaService>(CaptchaTypes.RebusMath);
 
 			builder.RegisterType<CaptchaResolverFactory>().As<ICaptchaResolverFactory>();
 

@@ -3,6 +3,6 @@
 	public enum CaptchaTypes
 	{
 		GameWords = 1,
-		RebusCounter = 2
+		RebusMath = 2
 	}
 }

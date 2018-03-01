@@ -1,30 +1,22 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using CaptchaDemo.Configuration;
-using CaptchaDemo.Core.Models;
 using CaptchaDemo.Core.Services;
 using CaptchaDemo.Data.Entities;
 using CaptchaDemo.Data.Enum;
 using CaptchaDemo.Data.Repositories;
-using CaptchaDemo.IoC.Resolver;
 using CaptchaDemo.Models;
-using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
 namespace CaptchaDemo.Controllers
 {
 	public class HomeController : Controller
 	{
+		private readonly IStorageKeyProvider _storageKeyProvider;
 		private readonly IRepository<Question> _repository;
-		private readonly IImageService _imageService;
-		private readonly ICaptchaConfiguration _captchaConfiguration;
-		private readonly IFileService _fileService;
 
-		public HomeController(IRepository<Question> repository, IImageService imageService, ICaptchaConfiguration captchaConfiguration, IFileService fileService, ICaptchaResolverFactory resolverFactory)
+		public HomeController(IStorageKeyProvider storageKeyProvider, IRepository<Question> repository)
 		{
+			_storageKeyProvider = storageKeyProvider;
 			_repository = repository;
-			_imageService = imageService;
-			_captchaConfiguration = captchaConfiguration;
-			_fileService = fileService;
 		}
 
 		public ActionResult Index()
@@ -34,7 +26,7 @@ namespace CaptchaDemo.Controllers
 
 		public ActionResult About()
 		{
-			ViewBag.Message = $"Your application description page.";
+			ViewBag.Message = "Your application description page.";
 
 			return View();
 		}
@@ -54,6 +46,41 @@ namespace CaptchaDemo.Controllers
 				return View("Index");
 			}
 			return View(model);
+		}
+
+		public ActionResult Configuration()
+		{
+			return View(new QuestionViewModel());
+		}
+
+		[HttpPost]
+		public ActionResult Configuration(QuestionViewModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			SaveQuestion(model);
+
+			return View();
+		}
+
+		private void SaveQuestion(QuestionViewModel model)
+		{
+			var fileName = model.File.FileName;
+			var path = _storageKeyProvider.GetFilePath(fileName, CaptchaTypes.RebusMath.ToString(), true);
+			model.File.SaveAs(path);
+
+			var question = new Question
+			{
+				ImageUrl = _storageKeyProvider.GetFileName(path),
+				Answers = new []{model.Answer},
+				Text = model.Text,
+				Type = CaptchaTypes.RebusMath.ToString()
+			};
+
+			Task.Run(async () => await _repository.InsertAsync(question));
 		}
 	}
 }

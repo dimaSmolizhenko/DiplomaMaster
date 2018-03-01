@@ -25,9 +25,12 @@ textarea {
 
 .captcha-image {
 	width: 280px;
-	height: 80px;
 }
 
 .captcha-text-field {
 	margin-top: 20px;
+}
+
+.captcha-image.type-math {
+	width: 500px;
 }

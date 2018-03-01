@@ -10,7 +10,7 @@ using CaptchaDemo.Data.Repositories;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
-	public class GameWordsService : ICapthcaService
+	public class GameWordsService : BaseCaptchaService, ICapthcaService
 	{
 		#region Dependencies
 
@@ -23,7 +23,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		#region .ctor
 
-		public GameWordsService(IRepository<Question> repository, IImageService imageService, IFileService fileService, IStorageKeyProvider storageKeyProvider)
+		public GameWordsService(IRepository<Question> repository, IImageService imageService, IFileService fileService, IStorageKeyProvider storageKeyProvider) : base(storageKeyProvider)
 		{
 			_repository = repository;
 			_imageService = imageService;
@@ -57,27 +57,6 @@ namespace CaptchaDemo.Core.Services.Impls
 		#endregion
 
 		#region Private Methods
-
-		private bool Contains(IReadOnlyCollection<string> dbAnswers, IReadOnlyCollection<string> answers)
-		{
-			var contains = false;
-
-			if (dbAnswers.Count != answers.Count) { return false; }
-
-			foreach (var answer in answers)
-			{
-				if (dbAnswers.Contains(answer))
-				{
-					contains = true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-
-			return contains;
-		}
 
 		private string RandomChars(int length)
 		{
@@ -114,18 +93,6 @@ namespace CaptchaDemo.Core.Services.Impls
 				Answers = words.ToArray(),
 				Text = questionText,
 				Type = CaptchaTypes.GameWords.ToString()
-			};
-		}
-
-		private QuestionModel MapQuestionToQuestionModel(Question question)
-		{
-			return new QuestionModel
-			{
-				QuestionId = question.Id,
-				Text = question.Text,
-				Type = question.Type,
-				Answers = question.Answers.Select(x => x).ToArray(),
-				ImageUrl = _storageKeyProvider.GetWebFilePath(question.Type, question.ImageUrl)
 			};
 		}
 
