@@ -45,6 +45,8 @@ namespace CaptchaDemo.IoC
 			builder.Register(c => ConfigurationManager.GetSection(SectionNames.CapthaSettings)).As<ICaptchaConfiguration>();
 			builder.RegisterType<Repository<Question>>().As<IRepository<Question>>()
 				.WithParameter(new TypedParameter(typeof(string), DbConsts.QuestionCollectionName));
+
+			builder.RegisterType<RandomProvider>().As<IRandomProvider>();
 		}
 	}
 }

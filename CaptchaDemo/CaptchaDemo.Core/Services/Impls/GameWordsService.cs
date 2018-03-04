@@ -17,18 +17,20 @@ namespace CaptchaDemo.Core.Services.Impls
 		private readonly IRepository<Question> _repository;
 		private readonly IImageService _imageService;
 		private readonly IFileService _fileService;
-		private readonly IStorageKeyProvider _storageKeyProvider;
+		private readonly IRandomProvider _randomProvider;
 
 		#endregion
 
 		#region .ctor
 
-		public GameWordsService(IRepository<Question> repository, IImageService imageService, IFileService fileService, IStorageKeyProvider storageKeyProvider) : base(storageKeyProvider)
+		public GameWordsService(IRepository<Question> repository, IImageService imageService, 
+			IFileService fileService, IStorageKeyProvider storageKeyProvider, 
+			IRandomProvider randomProvider) : base(storageKeyProvider)
 		{
 			_repository = repository;
 			_imageService = imageService;
 			_fileService = fileService;
-			_storageKeyProvider = storageKeyProvider;
+			_randomProvider = randomProvider;
 		}
 
 		#endregion
@@ -60,10 +62,9 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		private string RandomChars(int length)
 		{
-			var random = new Random();
 			const string chars = "abcdefghijklmnopqrstuvwxyz";
 			return new string(Enumerable.Repeat(chars, length)
-				.Select(s => s[random.Next(s.Length)])
+				.Select(s => s[_randomProvider.GetRandom(s.Length)])
 				.ToArray());
 		}
 
@@ -73,14 +74,14 @@ namespace CaptchaDemo.Core.Services.Impls
 
 			foreach (var t in words)
 			{
-				var random = new Random();
-				var strLength = random.Next(3, 5);
+				var strLength = _randomProvider.GetRandom(3, 7);
 				var randomChars = RandomChars(strLength);
 				stringBuilder.Append(randomChars);
 				stringBuilder.Append(t);
 			}
 
-			stringBuilder.Append(RandomChars(3));
+			var randLength = _randomProvider.GetRandom(3, 7);
+			stringBuilder.Append(RandomChars(randLength));
 
 			return stringBuilder.ToString().ToLowerInvariant();
 		}

@@ -11,14 +11,16 @@ namespace CaptchaDemo.Core.Services.Impls
 		#region Dependencies
 
 		private readonly IStorageKeyProvider _storageKeyProvider;
+		private readonly IRandomProvider _randomProvider;
 
 		#endregion
 
 		#region .ctor
 
-		public FileService(IStorageKeyProvider storageKeyProvider)
+		public FileService(IStorageKeyProvider storageKeyProvider, IRandomProvider randomProvider)
 		{
 			_storageKeyProvider = storageKeyProvider;
+			_randomProvider = randomProvider;
 		}
 
 		#endregion
@@ -48,11 +50,10 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		private string GetWord(IReadOnlyList<string> words, List<string> captchaList)
 		{
-			var random = new Random();
 			var word = "";
 			while (word.Length < 4)
 			{
-				var number = random.Next(0, words.Count);
+				var number = _randomProvider.GetRandom(words.Count);
 				var randomWord = words[number];
 				if (!captchaList.Contains(randomWord))
 				{
@@ -71,8 +72,7 @@ namespace CaptchaDemo.Core.Services.Impls
 		{
 			var reader = new PdfReader(filePath);
 
-			var random = new Random();
-			var pageNumber = random.Next(0, reader.NumberOfPages);
+			var pageNumber = _randomProvider.GetRandom(reader.NumberOfPages);
 
 			var pageText = PdfTextExtractor.GetTextFromPage(reader, pageNumber);
 

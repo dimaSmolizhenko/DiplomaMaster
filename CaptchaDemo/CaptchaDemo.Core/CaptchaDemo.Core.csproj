@@ -37,6 +37,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,15 +49,19 @@
     <Compile Include="Consts\ConfigurationConsts.cs" />
     <Compile Include="Models\CapthcaConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ICacheProvider.cs" />
     <Compile Include="Services\ICapthcaService.cs" />
     <Compile Include="Services\IFileService.cs" />
     <Compile Include="Services\IImageService.cs" />
+    <Compile Include="Services\Impls\CacheProvider.cs" />
     <Compile Include="Services\Impls\CaptchaMathService.cs" />
     <Compile Include="Services\Impls\BaseCaptchaService.cs" />
     <Compile Include="Services\Impls\FileService.cs" />
     <Compile Include="Services\Impls\GameWordsService.cs" />
     <Compile Include="Services\Impls\ImageService.cs" />
+    <Compile Include="Services\Impls\RandomProvider.cs" />
     <Compile Include="Services\Impls\StorageKeyProvider.cs" />
+    <Compile Include="Services\IRandomProvider.cs" />
     <Compile Include="Services\IStorageKeyProvider.cs" />
   </ItemGroup>
   <ItemGroup>
