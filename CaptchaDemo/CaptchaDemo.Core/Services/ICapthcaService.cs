@@ -5,7 +5,7 @@ namespace CaptchaDemo.Core.Services
 {
 	public interface ICapthcaService
 	{
-		Task<bool> ValidateCaptchaAsync(string guid, string[] answers);
-		Task<QuestionModel> GetCapthaAsync();
+		bool ValidateCaptchaAsync(string guid, string[] answers);
+		QuestionModel GetCapthaAsync();
 	}
 }

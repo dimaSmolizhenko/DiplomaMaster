@@ -9,5 +9,7 @@
 		public const string CaptchaFilePath = "filePathToPDF";
 
 		public const string CaptchaWebStoragePath = "webStoragePath";
+
+		public const string CaptchaLifeTime = "captchaLifeTimeMinutes";
 	}
 }

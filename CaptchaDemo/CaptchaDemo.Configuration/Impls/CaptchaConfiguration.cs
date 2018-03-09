@@ -13,5 +13,8 @@ namespace CaptchaDemo.Configuration.Impls
 
 		[ConfigurationProperty(ConfigurationConsts.CaptchaWebStoragePath, IsRequired = true)]
 		public string WebStoragePath => base[ConfigurationConsts.CaptchaWebStoragePath].ToString();
+
+		[ConfigurationProperty(ConfigurationConsts.CaptchaLifeTime, IsRequired = true)]
+		public int CaptchaLifeTime => (int)base[ConfigurationConsts.CaptchaLifeTime];
 	}
 }

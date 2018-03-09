@@ -11,22 +11,23 @@ namespace CaptchaDemo.Core.Services.Impls
 		private readonly IRepository<Question> _repository;
 		private readonly IRandomProvider _randomProvider;
 
-		public CaptchaMathService(IRepository<Question> repository, IStorageKeyProvider storageKeyProvider, IRandomProvider randomProvider) : base(storageKeyProvider)
+		public CaptchaMathService(IRepository<Question> repository, IStorageKeyProvider storageKeyProvider, 
+			IRandomProvider randomProvider) : base(storageKeyProvider)
 		{
 			_repository = repository;
 			_randomProvider = randomProvider;
 		}
 
-		public async Task<bool> ValidateCaptchaAsync(string guid, string[] answers)
+		public bool ValidateCaptchaAsync(string guid, string[] answers)
 		{
-			var question = await _repository.GetByIdAsync(guid);
+			var question = Task.Run(async () => await _repository.GetByIdAsync(guid)).Result;
 
 			return Contains(question.Answers, answers);
 		}
 
-		public async Task<QuestionModel> GetCapthaAsync()
+		public QuestionModel GetCapthaAsync()
 		{
-			var questions = await _repository.GetByTypeAsync(CaptchaTypes.RebusMath.ToString());
+			var questions = Task.Run(async () => await _repository.GetByTypeAsync(CaptchaTypes.RebusMath.ToString())).Result;
 			var randomNumber = _randomProvider.GetRandom(questions.Count);
 			var question = questions[randomNumber];
 

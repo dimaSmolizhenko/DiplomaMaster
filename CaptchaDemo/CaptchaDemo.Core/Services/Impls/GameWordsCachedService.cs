@@ -2,35 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using CaptchaDemo.Data.BussinessModels;
 using CaptchaDemo.Data.Entities;
 using CaptchaDemo.Data.Enum;
-using CaptchaDemo.Data.Repositories;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
-	public class GameWordsService : BaseCaptchaService, ICapthcaService
+	public class GameWordsCachedService : BaseCaptchaService, ICapthcaService
 	{
 		#region Dependencies
 
-		private readonly IRepository<Question> _repository;
-		private readonly IImageService _imageService;
+		private readonly ICacheProvider _cacheProvider;
 		private readonly IFileService _fileService;
+		private readonly IImageService _imageService;
 		private readonly IRandomProvider _randomProvider;
 
 		#endregion
 
 		#region .ctor
 
-		public GameWordsService(IRepository<Question> repository, IImageService imageService, 
-			IFileService fileService, IStorageKeyProvider storageKeyProvider, 
-			IRandomProvider randomProvider) : base(storageKeyProvider)
+		public GameWordsCachedService(ICacheProvider cacheProvider, IStorageKeyProvider storageKeyProvider, 
+			IRandomProvider randomProvider, IImageService imageService, 
+			IFileService fileService) : base(storageKeyProvider)
 		{
-			_repository = repository;
+			_cacheProvider = cacheProvider;
+			_randomProvider = randomProvider;
 			_imageService = imageService;
 			_fileService = fileService;
-			_randomProvider = randomProvider;
 		}
 
 		#endregion
@@ -39,12 +37,12 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		public bool ValidateCaptchaAsync(string guid, string[] answers)
 		{
-			var question = Task.Run(async () => await _repository.GetByIdAsync(guid)).Result;
+			var question = _cacheProvider.Get(guid) as Question;
 
-			var isCorrect = Contains(question.Answers, answers);
+			var isCorrect = question != null && Contains(question.Answers, answers);
 			if (isCorrect)
 			{
-				Task.Run(async () => await _repository.DeleteAsync(guid));
+				_cacheProvider.Delete(guid);
 			}
 
 			return isCorrect;
@@ -57,7 +55,7 @@ namespace CaptchaDemo.Core.Services.Impls
 			var imageUrl = _imageService.CreateImage(questionText);
 			var question = CreateQuestion(words, imageUrl, questionText);
 
-			Task.Run(async () => await _repository.InsertAsync(question)).Wait();
+			_cacheProvider.Add(question.Id, question);
 
 			return MapQuestionToQuestionModel(question);
 		}
@@ -96,6 +94,7 @@ namespace CaptchaDemo.Core.Services.Impls
 		{
 			return new Question
 			{
+				Id = Guid.NewGuid().ToString(),
 				ImageUrl = imageUrl,
 				Answers = words.ToArray(),
 				Text = questionText,

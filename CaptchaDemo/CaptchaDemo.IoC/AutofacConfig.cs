@@ -35,6 +35,7 @@ namespace CaptchaDemo.IoC
 		{
 			builder.RegisterType<GameWordsService>().Keyed<ICapthcaService>(CaptchaTypes.GameWords);
 			builder.RegisterType<CaptchaMathService>().Keyed<ICapthcaService>(CaptchaTypes.RebusMath);
+			builder.RegisterType<GameWordsCachedService>().Keyed<ICapthcaService>(CaptchaTypes.GameWordsCahed);
 
 			builder.RegisterType<CaptchaResolverFactory>().As<ICaptchaResolverFactory>();
 
@@ -47,6 +48,7 @@ namespace CaptchaDemo.IoC
 				.WithParameter(new TypedParameter(typeof(string), DbConsts.QuestionCollectionName));
 
 			builder.RegisterType<RandomProvider>().As<IRandomProvider>();
+			builder.RegisterType<CacheProvider>().As<ICacheProvider>();
 		}
 	}
 }

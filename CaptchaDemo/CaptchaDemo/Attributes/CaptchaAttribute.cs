@@ -26,7 +26,7 @@ namespace CaptchaDemo.Attributes
 				{
 					var captchaResolverFactory = new CaptchaResolverFactory();
 					var captchaService = captchaResolverFactory.GetServiceByType(type);
-					var isValid = Task.Run(async () => await captchaService.ValidateCaptchaAsync(guid, captchaWords)).Result; 
+					var isValid = captchaService.ValidateCaptchaAsync(guid, captchaWords); 
 					return isValid;
 				}
 

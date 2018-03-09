@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using CaptchaDemo.Core.Services;
 using CaptchaDemo.Data.BussinessModels;
-using CaptchaDemo.Data.Entities;
 using CaptchaDemo.Data.Enum;
 using CaptchaDemo.IoC.Resolver;
 
@@ -95,7 +92,7 @@ namespace CaptchaDemo.HtmlHlper
 		{
 			var captchaResolverFactory = new CaptchaResolverFactory();
 			var captchaService = captchaResolverFactory.GetServiceByType(type);
-			var question = Task.Run(async () => await captchaService.GetCapthaAsync()).Result;
+			var question = captchaService.GetCapthaAsync();
 
 			return question;
 		}

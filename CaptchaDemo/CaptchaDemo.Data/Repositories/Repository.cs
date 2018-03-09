@@ -25,6 +25,17 @@ namespace CaptchaDemo.Data.Repositories
 			var connection = new MongoUrlBuilder(connectionString);
 			var client = new MongoClient(connectionString);
 			var database = client.GetDatabase(connection.DatabaseName);
+
+			var collections = Task.Run(async () => await database.ListCollectionsAsync(new ListCollectionsOptions
+			{
+				Filter = new BsonDocument("name", collectionName)
+			})).Result;
+
+			if (!collections.Any())
+			{
+				database.CreateCollection(collectionName);
+			}
+
 			_collection = database.GetCollection<T>(collectionName);
 		}
 
@@ -68,11 +79,6 @@ namespace CaptchaDemo.Data.Repositories
 		public async Task DeleteAsync(string id)
 		{
 			await _collection.DeleteOneAsync(id);
-		}
-
-		public string CreateObjectId() //TODO: move out
-		{
-			return ObjectId.GenerateNewId().ToString();
 		}
 
 		#endregion
