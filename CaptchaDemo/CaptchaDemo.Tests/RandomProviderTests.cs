@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace CaptchaDemo.Tests
 {
+	[TestFixture]
 	public class RandomProviderTests
 	{
 		private IRandomProvider _randomProvider;
@@ -15,12 +16,12 @@ namespace CaptchaDemo.Tests
 		}
 
 		[Test]
-		public void GetRandom_Zero_zero()
+		public void GetRandom_OneNumber_BetweenInterval()
 		{
 			const int randomMax = 6;
 			var randomNumb = _randomProvider.GetRandom(randomMax);
 
-			Assert.AreNotEqual(randomNumb, 0);
+			Assert.IsTrue(randomNumb >= 1 && randomNumb < randomMax);
 		}
 
 		[Test]

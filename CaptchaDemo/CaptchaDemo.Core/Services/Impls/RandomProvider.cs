@@ -16,7 +16,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		public int GetRandom(int max)
 		{
-			return GetRandom(0, max);
+			return GetRandom(1, max);
 		}
 
 		#endregion

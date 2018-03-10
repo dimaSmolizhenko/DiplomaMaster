@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using CaptchaDemo.Configuration;
 using iTextSharp.text.pdf;
@@ -33,7 +34,7 @@ namespace CaptchaDemo.Core.Services.Impls
 		{
 			var filePath = _storageKeyProvider.GetPDFFilePath();
 
-			var wordsList = GetWords(filePath);
+			var wordsList = GetWords(filePath).Where(x => !string.IsNullOrEmpty(x) && x.Length > 3).ToArray();
 
 			var list = new List<string>();
 
@@ -74,7 +75,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		private string[] GetWords(string filePath)
 		{
-			var reader = new PdfReader(filePath);
+			var reader = new PdfReader(filePath); //TODO: add dependency injection and change test
 
 			var pageNumber = _randomProvider.GetRandom(reader.NumberOfPages);
 
