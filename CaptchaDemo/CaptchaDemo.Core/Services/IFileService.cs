@@ -4,6 +4,6 @@ namespace CaptchaDemo.Core.Services
 {
 	public interface IFileService
 	{
-		IList<string> GetWordsFromFile(int count = 1);
+		IList<string> GetWordsFromFile();
 	}
 }

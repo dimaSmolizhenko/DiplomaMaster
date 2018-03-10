@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using CaptchaDemo.Configuration;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 
@@ -12,28 +12,32 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		private readonly IStorageKeyProvider _storageKeyProvider;
 		private readonly IRandomProvider _randomProvider;
+		private readonly ICaptchaConfiguration _captchaConfiguration;
 
 		#endregion
 
 		#region .ctor
 
-		public FileService(IStorageKeyProvider storageKeyProvider, IRandomProvider randomProvider)
+		public FileService(IStorageKeyProvider storageKeyProvider, IRandomProvider randomProvider, ICaptchaConfiguration captchaConfiguration)
 		{
 			_storageKeyProvider = storageKeyProvider;
 			_randomProvider = randomProvider;
+			_captchaConfiguration = captchaConfiguration;
 		}
 
 		#endregion
 
 		#region Public Methods
 
-		public IList<string> GetWordsFromFile(int count = 1)
+		public IList<string> GetWordsFromFile()
 		{
 			var filePath = _storageKeyProvider.GetPDFFilePath();
 
 			var wordsList = GetWords(filePath);
 
 			var list = new List<string>();
+
+			var count = _captchaConfiguration.CaptchaWordsCount;
 
 			for (var i = 0; i < count; i++)
 			{

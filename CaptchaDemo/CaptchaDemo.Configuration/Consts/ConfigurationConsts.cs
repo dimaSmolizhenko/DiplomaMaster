@@ -11,5 +11,7 @@
 		public const string CaptchaWebStoragePath = "webStoragePath";
 
 		public const string CaptchaLifeTime = "captchaLifeTimeMinutes";
+
+		public const string CaptchaWordsCount = "captchaWordsCount";
 	}
 }

@@ -6,5 +6,6 @@
 		string FilePathToPDF { get; }
 		string WebStoragePath { get; }
 		int CaptchaLifeTime { get; }
+		int CaptchaWordsCount { get; }
 	}
 }

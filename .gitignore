@@ -3,10 +3,10 @@ CaptchaDemo/.vs/CaptchaDemo/v15/Server/sqlite3/storage.ide-shm
 CaptchaDemo/.vs/CaptchaDemo/v15/Server/sqlite3/storage.ide
 CaptchaDemo/.vs/CaptchaDemo/v15/Server/sqlite3/db.lock
 CaptchaDemo/.vs/CaptchaDemo/v15/.suo
-CaptchaDemo/CaptchaDemo/CaptchaDemo.Web.csproj.user
-CaptchaDemo/CaptchaDemo/storage/
-CaptchaDemo/CaptchaDemo/bin/
-CaptchaDemo/CaptchaDemo/obj/
+CaptchaDemo/CaptchaDemo.Web/CaptchaDemo.Web.csproj.user
+CaptchaDemo/CaptchaDemo.Web/storage/
+CaptchaDemo/CaptchaDemo.Web/bin/
+CaptchaDemo/CaptchaDemo.Web/obj/
 CaptchaDemo/CaptchaDemo.Configuration/bin/
 CaptchaDemo/CaptchaDemo.Configuration/obj/
 CaptchaDemo/CaptchaDemo.Core/bin/
@@ -15,3 +15,5 @@ CaptchaDemo/CaptchaDemo.Data/bin/
 CaptchaDemo/CaptchaDemo.Data/obj/
 CaptchaDemo/CaptchaDemo.IoC/bin/
 CaptchaDemo/CaptchaDemo.IoC/obj/
+CaptchaDemo/CaptchaDemo.Tests/obj/
+CaptchaDemo/CaptchaDemo.Tests/bin/

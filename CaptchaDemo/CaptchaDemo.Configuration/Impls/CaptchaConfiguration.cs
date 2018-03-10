@@ -16,5 +16,8 @@ namespace CaptchaDemo.Configuration.Impls
 
 		[ConfigurationProperty(ConfigurationConsts.CaptchaLifeTime, IsRequired = true)]
 		public int CaptchaLifeTime => (int)base[ConfigurationConsts.CaptchaLifeTime];
+
+		[ConfigurationProperty(ConfigurationConsts.CaptchaWordsCount, IsRequired = true)]
+		public int CaptchaWordsCount => (int) base[ConfigurationConsts.CaptchaWordsCount];
 	}
 }
