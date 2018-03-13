@@ -56,8 +56,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileServiceTests.cs" />
-    <Compile Include="RandomProviderTests.cs" />
+    <Compile Include="TextFixtures\FileServiceTests.cs" />
+    <Compile Include="TextFixtures\GameWordsServiceTests.cs" />
+    <Compile Include="TextFixtures\RandomProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,14 +4,14 @@ using CaptchaDemo.Core.Services.Impls;
 using Moq;
 using NUnit.Framework;
 
-namespace CaptchaDemo.Tests
+namespace CaptchaDemo.Tests.TextFixtures
 {
 	[TestFixture]
 	public class FileServiceTests
 	{
 
 		[SetUp]
-		public void InitTest()
+		public void Setup()
 		{
 		}
 
