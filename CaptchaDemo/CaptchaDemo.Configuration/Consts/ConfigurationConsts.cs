@@ -13,5 +13,7 @@
 		public const string CaptchaLifeTime = "captchaLifeTimeMinutes";
 
 		public const string CaptchaWordsCount = "captchaWordsCount";
+
+		public const string GenerateFromImagePath = "generateFromImagePath";
 	}
 }

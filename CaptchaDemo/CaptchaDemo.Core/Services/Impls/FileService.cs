@@ -13,13 +13,13 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		private readonly IStorageKeyProvider _storageKeyProvider;
 		private readonly IRandomProvider _randomProvider;
-		private readonly ICaptchaConfiguration _captchaConfiguration;
+		private readonly ICaptchaGameWordsConfiguration _captchaConfiguration;
 
 		#endregion
 
 		#region .ctor
 
-		public FileService(IStorageKeyProvider storageKeyProvider, IRandomProvider randomProvider, ICaptchaConfiguration captchaConfiguration)
+		public FileService(IStorageKeyProvider storageKeyProvider, IRandomProvider randomProvider, ICaptchaGameWordsConfiguration captchaConfiguration)
 		{
 			_storageKeyProvider = storageKeyProvider;
 			_randomProvider = randomProvider;

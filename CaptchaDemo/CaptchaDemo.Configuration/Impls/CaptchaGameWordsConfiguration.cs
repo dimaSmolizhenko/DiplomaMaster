@@ -3,7 +3,7 @@ using CaptchaDemo.Configuration.Consts;
 
 namespace CaptchaDemo.Configuration.Impls
 {
-	public class CaptchaConfiguration : ConfigurationSection, ICaptchaConfiguration
+	public class CaptchaGameWordsConfiguration : ConfigurationSection, ICaptchaGameWordsConfiguration
 	{
 		[ConfigurationProperty(ConfigurationConsts.CaptchaFileStoragePath, IsRequired = true)]
 		public string FileStoragePath => base[ConfigurationConsts.CaptchaFileStoragePath].ToString();

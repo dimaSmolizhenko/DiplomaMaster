@@ -2,6 +2,7 @@
 {
 	public class SectionNames
 	{
-		public static string CapthaSettings => "captchaSettings";
+		public static string CapthaGameWordsSettings => "captchaGameWordsSettings";
+		public static string CapthaPuzzleMathSettings => "captchaPuzzleMathSettings";
 	}
 }

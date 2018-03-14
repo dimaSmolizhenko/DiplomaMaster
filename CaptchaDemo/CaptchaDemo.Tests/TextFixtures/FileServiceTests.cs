@@ -19,7 +19,7 @@ namespace CaptchaDemo.Tests.TextFixtures
 		public void GetWordsFromFile_CountIs2_Return2Words()
 		{
 			const int countOfWords = 2;
-			var mock = new Mock<ICaptchaConfiguration>();
+			var mock = new Mock<ICaptchaGameWordsConfiguration>();
 			mock.Setup(x => x.CaptchaWordsCount).Returns(countOfWords);
 
 			var mockStorageKey = new Mock<IStorageKeyProvider>();

@@ -43,7 +43,7 @@ namespace CaptchaDemo.IoC
 			builder.RegisterType<StorageKeyProvider>().As<IStorageKeyProvider>();
 			builder.RegisterType<ImageService>().As<IImageService>();
 			builder.RegisterType<FileService>().As<IFileService>();
-			builder.Register(c => ConfigurationManager.GetSection(SectionNames.CapthaSettings)).As<ICaptchaConfiguration>();
+			builder.Register(c => ConfigurationManager.GetSection(SectionNames.CapthaGameWordsSettings)).As<ICaptchaGameWordsConfiguration>();
 			builder.RegisterType<Repository<Question>>().As<IRepository<Question>>()
 				.WithParameter(new TypedParameter(typeof(string), DbConsts.QuestionCollectionName));
 

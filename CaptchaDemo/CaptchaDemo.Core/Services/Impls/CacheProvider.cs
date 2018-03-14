@@ -9,13 +9,13 @@ namespace CaptchaDemo.Core.Services.Impls
 		#region Dependencies
 
 		private readonly MemoryCache _memoryCache;
-		private readonly ICaptchaConfiguration _captchaConfiguration;
+		private readonly ICaptchaGameWordsConfiguration _captchaConfiguration;
 
 		#endregion
 
 		#region .ctor
 
-		public CacheProvider(ICaptchaConfiguration captchaConfiguration)
+		public CacheProvider(ICaptchaGameWordsConfiguration captchaConfiguration)
 		{
 			_captchaConfiguration = captchaConfiguration;
 			_memoryCache = MemoryCache.Default;

@@ -9,13 +9,13 @@ namespace CaptchaDemo.Core.Services.Impls
 	{
 		#region Dependencies
 
-		private readonly ICaptchaConfiguration _captchaConfiguration;
+		private readonly ICaptchaGameWordsConfiguration _captchaConfiguration;
 
 		#endregion
 
 		#region .ctor
 
-		public StorageKeyProvider(ICaptchaConfiguration captchaConfiguration)
+		public StorageKeyProvider(ICaptchaGameWordsConfiguration captchaConfiguration)
 		{
 			_captchaConfiguration = captchaConfiguration;
 		}

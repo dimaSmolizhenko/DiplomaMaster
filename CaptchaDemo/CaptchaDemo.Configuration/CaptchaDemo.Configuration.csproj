@@ -44,8 +44,10 @@
   <ItemGroup>
     <Compile Include="Consts\ConfigurationConsts.cs" />
     <Compile Include="Consts\SectionNames.cs" />
-    <Compile Include="ICaptchaConfiguration.cs" />
-    <Compile Include="Impls\CaptchaConfiguration.cs" />
+    <Compile Include="ICaptchaGameWordsConfiguration.cs" />
+    <Compile Include="ICaptchaPuzzleMathConfiguration.cs" />
+    <Compile Include="Impls\CaptchaPuzzleMathConfiguration.cs" />
+    <Compile Include="Impls\CaptchaGameWordsConfiguration.cs" />
     <Compile Include="Impls\DbConfiguration.cs" />
     <Compile Include="IDbConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

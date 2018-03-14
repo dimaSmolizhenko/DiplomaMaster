@@ -1,6 +1,6 @@
 ﻿namespace CaptchaDemo.Configuration
 {
-	public interface ICaptchaConfiguration
+	public interface ICaptchaGameWordsConfiguration
 	{
 		string FileStoragePath { get; }
 		string FilePathToPDF { get; }
