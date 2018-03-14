@@ -5,11 +5,11 @@ using CaptchaDemo.Data.Entities;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
-	public class BaseCaptchaService
+	public abstract class BaseCaptchaService
 	{
 		private readonly IStorageKeyProvider _storageKeyProvider;
 
-		public BaseCaptchaService(IStorageKeyProvider storageKeyProvider)
+		protected BaseCaptchaService(IStorageKeyProvider storageKeyProvider)
 		{
 			_storageKeyProvider = storageKeyProvider;
 		}

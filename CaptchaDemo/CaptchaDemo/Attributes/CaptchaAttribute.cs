@@ -1,12 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
-using CaptchaDemo.Configuration.Impls;
-using CaptchaDemo.Core.Services.Impls;
-using CaptchaDemo.Data.Entities;
 using CaptchaDemo.Data.Enum;
-using CaptchaDemo.Data.Repositories;
 using CaptchaDemo.IoC.Resolver;
 
 namespace CaptchaDemo.Attributes

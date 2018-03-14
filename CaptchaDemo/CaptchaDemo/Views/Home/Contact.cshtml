@@ -34,7 +34,9 @@
 	</div>
 	<div class="form-group">
 		@Html.LabelFor(m => m.Captcha)
-		@Html.CaptchaFor(m => m.Captcha, CaptchaTypes.GameWords, new { @class = "form-control captcha-text-field" })
+
+		@Html.CaptchaFor(m => m.Captcha, CaptchaTypes.GameWordsCahed, new { @class = "form-control captcha-text-field" })
+
 		@Html.ValidationMessageFor(m => m.Captcha)
 	</div>
 

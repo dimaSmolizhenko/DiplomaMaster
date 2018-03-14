@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo.Web", "CaptchaDemo.Web\CaptchaDemo.Web.csproj", "{BA2A8EC9-47E4-44D1-8C86-C939D72F5E68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo", "CaptchaDemo\CaptchaDemo.csproj", "{BA2A8EC9-47E4-44D1-8C86-C939D72F5E68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo.IoC", "CaptchaDemo.IoC\CaptchaDemo.IoC.csproj", "{19F856F1-8F77-4EBC-9548-BB2A16AA3981}"
 EndProject
