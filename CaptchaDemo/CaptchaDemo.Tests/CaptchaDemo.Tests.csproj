@@ -56,12 +56,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TextFixtures\FileServiceTests.cs" />
-    <Compile Include="TextFixtures\GameWordsServiceTests.cs" />
-    <Compile Include="TextFixtures\RandomProviderTests.cs" />
+    <Compile Include="TestFixtures\CaptchaPuzzleMathTests.cs" />
+    <Compile Include="TestFixtures\FileServiceTests.cs" />
+    <Compile Include="TestFixtures\GameWordsServiceTests.cs" />
+    <Compile Include="TestFixtures\RandomProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

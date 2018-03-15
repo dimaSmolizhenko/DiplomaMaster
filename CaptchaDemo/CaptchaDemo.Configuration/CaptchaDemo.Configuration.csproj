@@ -33,6 +33,10 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +50,8 @@
     <Compile Include="Consts\SectionNames.cs" />
     <Compile Include="ICaptchaGameWordsConfiguration.cs" />
     <Compile Include="ICaptchaPuzzleMathConfiguration.cs" />
+    <Compile Include="ICaptchaConfiguration.cs" />
+    <Compile Include="Impls\CaptchaConfiguration.cs" />
     <Compile Include="Impls\CaptchaPuzzleMathConfiguration.cs" />
     <Compile Include="Impls\CaptchaGameWordsConfiguration.cs" />
     <Compile Include="Impls\DbConfiguration.cs" />

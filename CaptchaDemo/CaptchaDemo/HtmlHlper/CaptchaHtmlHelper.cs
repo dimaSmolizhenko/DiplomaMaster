@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using CaptchaDemo.Core.IoC.Resolver;
 using CaptchaDemo.Data.BussinessModels;
 using CaptchaDemo.Data.Enum;
-using CaptchaDemo.IoC.Resolver;
 
 namespace CaptchaDemo.HtmlHlper
 {

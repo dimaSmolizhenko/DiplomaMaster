@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.IoC.Resolver;
 using CaptchaDemo.Data.BussinessModels;
 using CaptchaDemo.Data.Entities;
 using CaptchaDemo.Data.Enum;
@@ -12,7 +14,7 @@ namespace CaptchaDemo.Core.Services.Impls
 		private readonly IRandomProvider _randomProvider;
 
 		public CaptchaMathService(IRepository<Question> repository, IStorageKeyProvider storageKeyProvider, 
-			IRandomProvider randomProvider) : base(storageKeyProvider)
+			IRandomProvider randomProvider, ICaptchaConfiguration captchaConfiguration, ICaptchaResolverFactory captchaResolverFactory) : base(storageKeyProvider, captchaConfiguration, captchaResolverFactory)
 		{
 			_repository = repository;
 			_randomProvider = randomProvider;
@@ -22,7 +24,7 @@ namespace CaptchaDemo.Core.Services.Impls
 		{
 			var question = Task.Run(async () => await _repository.GetByIdAsync(guid)).Result;
 
-			return Contains(question.Answers, answers);
+			return ContainsAll(question.Answers, answers);
 		}
 
 		public QuestionModel GetCapthaAsync()

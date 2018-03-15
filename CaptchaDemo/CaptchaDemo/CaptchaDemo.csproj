@@ -223,10 +223,6 @@
       <Project>{c4c9ca79-870c-4408-a89b-34809932dfbe}</Project>
       <Name>CaptchaDemo.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CaptchaDemo.IoC\CaptchaDemo.IoC.csproj">
-      <Project>{19f856f1-8f77-4ebc-9548-bb2a16aa3981}</Project>
-      <Name>CaptchaDemo.IoC</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

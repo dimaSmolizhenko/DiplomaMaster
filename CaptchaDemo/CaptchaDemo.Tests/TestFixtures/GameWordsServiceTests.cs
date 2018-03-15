@@ -1,11 +1,13 @@
-﻿using CaptchaDemo.Core.Services;
+﻿using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.IoC.Resolver;
+using CaptchaDemo.Core.Services;
 using CaptchaDemo.Core.Services.Impls;
 using CaptchaDemo.Data.Entities;
 using CaptchaDemo.Data.Enum;
 using Moq;
 using NUnit.Framework;
 
-namespace CaptchaDemo.Tests.TextFixtures
+namespace CaptchaDemo.Tests.TestFixtures
 {
 	/// <summary>
 	/// Summary description for GameWordsServiceTests
@@ -33,7 +35,7 @@ namespace CaptchaDemo.Tests.TextFixtures
 				Answers = answers,
 				ImageUrl = "url",
 				Text = "question",
-				Type = CaptchaTypes.GameWordsCahed.ToString()
+				Type = CaptchaTypes.GameWords.ToString()
 			};
 
 			var mockCache = new Mock<ICacheProvider>();
@@ -43,8 +45,12 @@ namespace CaptchaDemo.Tests.TextFixtures
 			var mockRandom = new Mock<IRandomProvider>();
 			var mockFileService = new Mock<IFileService>();
 			var mockImageService = new Mock<IImageService>();
+			var mockConfiguration = new Mock<ICaptchaConfiguration>();
+			var mockResolver = new Mock<ICaptchaResolverFactory>();
 
-			var captchaService = new GameWordsCachedService(mockCache.Object, mockStorageKey.Object, mockRandom.Object, mockImageService.Object, mockFileService.Object);
+			var captchaService = new GameWordsService(mockCache.Object, mockStorageKey.Object, 
+				mockRandom.Object, mockImageService.Object, mockFileService.Object, 
+				mockConfiguration.Object, mockResolver.Object);
 
 			//act
 			var isValid = captchaService.ValidateCaptchaAsync(Id, answers);

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using CaptchaDemo.Core.IoC.Resolver;
 using CaptchaDemo.Data.Enum;
-using CaptchaDemo.IoC.Resolver;
 
 namespace CaptchaDemo.Attributes
 {

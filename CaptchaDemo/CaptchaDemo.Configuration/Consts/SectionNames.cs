@@ -4,5 +4,6 @@
 	{
 		public static string CapthaGameWordsSettings => "captchaGameWordsSettings";
 		public static string CapthaPuzzleMathSettings => "captchaPuzzleMathSettings";
+		public static string CapthaSettings => "captchaSettings";
 	}
 }

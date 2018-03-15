@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo", "CaptchaDemo\CaptchaDemo.csproj", "{BA2A8EC9-47E4-44D1-8C86-C939D72F5E68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo.IoC", "CaptchaDemo.IoC\CaptchaDemo.IoC.csproj", "{19F856F1-8F77-4EBC-9548-BB2A16AA3981}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo.Core", "CaptchaDemo.Core\CaptchaDemo.Core.csproj", "{DBDDC2CE-2929-4A90-AAEE-BA09F6E1951E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo.Data", "CaptchaDemo.Data\CaptchaDemo.Data.csproj", "{C4C9CA79-870C-4408-A89B-34809932DFBE}"
@@ -25,10 +23,6 @@ Global
 		{BA2A8EC9-47E4-44D1-8C86-C939D72F5E68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA2A8EC9-47E4-44D1-8C86-C939D72F5E68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA2A8EC9-47E4-44D1-8C86-C939D72F5E68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19F856F1-8F77-4EBC-9548-BB2A16AA3981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19F856F1-8F77-4EBC-9548-BB2A16AA3981}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19F856F1-8F77-4EBC-9548-BB2A16AA3981}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19F856F1-8F77-4EBC-9548-BB2A16AA3981}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DBDDC2CE-2929-4A90-AAEE-BA09F6E1951E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DBDDC2CE-2929-4A90-AAEE-BA09F6E1951E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBDDC2CE-2929-4A90-AAEE-BA09F6E1951E}.Release|Any CPU.ActiveCfg = Release|Any CPU

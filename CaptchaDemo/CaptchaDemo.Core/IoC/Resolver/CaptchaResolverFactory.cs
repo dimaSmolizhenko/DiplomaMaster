@@ -3,7 +3,7 @@ using Autofac.Integration.Mvc;
 using CaptchaDemo.Core.Services;
 using CaptchaDemo.Data.Enum;
 
-namespace CaptchaDemo.IoC.Resolver
+namespace CaptchaDemo.Core.IoC.Resolver
 {
 	public class CaptchaResolverFactory : ICaptchaResolverFactory
 	{
@@ -19,9 +19,9 @@ namespace CaptchaDemo.IoC.Resolver
 			return _componentContext.ResolveKeyed<ICapthcaService>(type);
 		}
 
-		public T ResolveService<T>()
+		public ICaptchaStorageProvider GetStorageProvider(bool isDatabaseAsStorage)
 		{
-			return _componentContext.Resolve<T>();
+			return _componentContext.ResolveKeyed<ICaptchaStorageProvider>(isDatabaseAsStorage);
 		}
 	}
 }

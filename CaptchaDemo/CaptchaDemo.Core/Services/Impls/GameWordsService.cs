@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.IoC.Resolver;
 using CaptchaDemo.Data.BussinessModels;
 using CaptchaDemo.Data.Entities;
 using CaptchaDemo.Data.Enum;
-using CaptchaDemo.Data.Repositories;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
@@ -14,23 +13,24 @@ namespace CaptchaDemo.Core.Services.Impls
 	{
 		#region Dependencies
 
-		private readonly IRepository<Question> _repository;
-		private readonly IImageService _imageService;
+		private readonly ICacheProvider _cacheProvider;
 		private readonly IFileService _fileService;
+		private readonly IImageService _imageService;
 		private readonly IRandomProvider _randomProvider;
 
 		#endregion
 
 		#region .ctor
 
-		public GameWordsService(IRepository<Question> repository, IImageService imageService, 
-			IFileService fileService, IStorageKeyProvider storageKeyProvider, 
-			IRandomProvider randomProvider) : base(storageKeyProvider)
+		public GameWordsService(ICacheProvider cacheProvider, IStorageKeyProvider storageKeyProvider, 
+			IRandomProvider randomProvider, IImageService imageService, 
+			IFileService fileService, ICaptchaConfiguration captchaConfiguration, 
+			ICaptchaResolverFactory captchaResolverFactory) : base(storageKeyProvider, captchaConfiguration, captchaResolverFactory)
 		{
-			_repository = repository;
+			_cacheProvider = cacheProvider;
+			_randomProvider = randomProvider;
 			_imageService = imageService;
 			_fileService = fileService;
-			_randomProvider = randomProvider;
 		}
 
 		#endregion
@@ -39,12 +39,12 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		public bool ValidateCaptchaAsync(string guid, string[] answers)
 		{
-			var question = Task.Run(async () => await _repository.GetByIdAsync(guid)).Result;
+			var question = CaptchaStorageProvider.Get(guid);
 
-			var isCorrect = Contains(question.Answers, answers);
+			var isCorrect = question != null && ContainsAll(question.Answers, answers);
 			if (isCorrect)
 			{
-				Task.Run(async () => await _repository.DeleteAsync(guid));
+				CaptchaStorageProvider.Delete(guid);
 			}
 
 			return isCorrect;
@@ -53,11 +53,12 @@ namespace CaptchaDemo.Core.Services.Impls
 		public QuestionModel GetCapthaAsync()
 		{
 			var words = _fileService.GetWordsFromFile();
-			var questionText = JoinRandomChars(words);
-			var imageUrl = _imageService.CreateImage(questionText);
+			var captchaText = JoinRandomChars(words);
+			var questionText = "Find words in current string.";
+			var imageUrl = _imageService.CreateImage(captchaText);
 			var question = CreateQuestion(words, imageUrl, questionText);
 
-			Task.Run(async () => await _repository.InsertAsync(question)).Wait();
+			CaptchaStorageProvider.Insert(question);
 
 			return MapQuestionToQuestionModel(question);
 		}
@@ -96,6 +97,7 @@ namespace CaptchaDemo.Core.Services.Impls
 		{
 			return new Question
 			{
+				Id = CaptchaStorageProvider.CreateIdentifier(),
 				ImageUrl = imageUrl,
 				Answers = words.ToArray(),
 				Text = questionText,

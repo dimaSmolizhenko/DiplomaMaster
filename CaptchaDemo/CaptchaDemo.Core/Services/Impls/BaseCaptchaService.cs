@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.IoC.Resolver;
 using CaptchaDemo.Data.BussinessModels;
 using CaptchaDemo.Data.Entities;
 
@@ -7,11 +9,15 @@ namespace CaptchaDemo.Core.Services.Impls
 {
 	public abstract class BaseCaptchaService
 	{
-		private readonly IStorageKeyProvider _storageKeyProvider;
+		protected readonly IStorageKeyProvider StorageKeyProvider;
+		protected readonly ICaptchaStorageProvider CaptchaStorageProvider;
 
-		protected BaseCaptchaService(IStorageKeyProvider storageKeyProvider)
+		protected BaseCaptchaService(IStorageKeyProvider storageKeyProvider, 
+			ICaptchaConfiguration captchaConfiguration, ICaptchaResolverFactory captchaResolverFactory)
 		{
-			_storageKeyProvider = storageKeyProvider;
+			StorageKeyProvider = storageKeyProvider;
+			CaptchaStorageProvider = captchaResolverFactory.GetStorageProvider(captchaConfiguration.CaptchaIsUseDatabase);
+
 		}
 
 		protected virtual QuestionModel MapQuestionToQuestionModel(Question question)
@@ -22,11 +28,11 @@ namespace CaptchaDemo.Core.Services.Impls
 				Text = question.Text,
 				Type = question.Type,
 				Answers = question.Answers.Select(x => x).ToArray(),
-				ImageUrl = _storageKeyProvider.GetWebFilePath(question.Type, question.ImageUrl)
+				ImageUrl = StorageKeyProvider.GetWebFilePath(question.Type, question.ImageUrl)
 			};
 		}
 
-		protected virtual bool Contains(IReadOnlyCollection<string> dbAnswers, IReadOnlyCollection<string> answers)
+		protected virtual bool ContainsAll(IReadOnlyCollection<string> dbAnswers, IReadOnlyCollection<string> answers)
 		{
 			var contains = false;
 
@@ -45,6 +51,11 @@ namespace CaptchaDemo.Core.Services.Impls
 			}
 
 			return contains;
+		}
+
+		protected virtual bool ContainsAny(IReadOnlyCollection<string> dbAnswers, IReadOnlyCollection<string> answers)
+		{
+			return answers.Any(dbAnswers.Contains);
 		}
 	}
 }

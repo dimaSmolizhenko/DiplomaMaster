@@ -2,6 +2,7 @@
 using System.Drawing.Imaging;
 using System.IO;
 using CaptchaDemo.Configuration;
+using CaptchaDemo.Data.Enum;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
@@ -9,15 +10,17 @@ namespace CaptchaDemo.Core.Services.Impls
 	{
 		#region Dependencies
 
-		private readonly ICaptchaGameWordsConfiguration _captchaConfiguration;
+		private readonly ICaptchaConfiguration _captchaConfiguration;
+		private readonly ICaptchaGameWordsConfiguration _captchaGameWordsConfiguration;
 
 		#endregion
 
 		#region .ctor
 
-		public StorageKeyProvider(ICaptchaGameWordsConfiguration captchaConfiguration)
+		public StorageKeyProvider(ICaptchaConfiguration captchaConfiguration, ICaptchaGameWordsConfiguration captchaGameWordsConfiguration)
 		{
 			_captchaConfiguration = captchaConfiguration;
+			_captchaGameWordsConfiguration = captchaGameWordsConfiguration;
 		}
 
 		#endregion
@@ -51,12 +54,23 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		public string GetPDFFilePath()
 		{
-			return _captchaConfiguration.FilePathToPDF;
+			return _captchaGameWordsConfiguration.FilePathToPDF;
 		}
 
 		public string GetWebFilePath(string captchaType, string fileName)
 		{
 			return CombineWebPath(captchaType, fileName);
+		}
+
+		public string[] GetFilesFromDirectory(string path)
+		{
+			if (!Directory.Exists(path))
+			{
+				throw new DirectoryNotFoundException();
+			}
+
+			var files = Directory.GetFiles(path);
+			return files;
 		}
 
 		#endregion
@@ -76,8 +90,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		private string GetCaptchaFSDirectory(string captchaType)
 		{
-			return FormatFSLink(
-				$"{_captchaConfiguration.FileStoragePath}{_captchaConfiguration.WebStoragePath}\\{captchaType}\\");
+			return FormatFSLink($"{_captchaConfiguration.FileStoragePath}{_captchaConfiguration.WebStoragePath}\\{captchaType}\\");
 		}
 
 		private string CombineWebPath(params string[] pathes)

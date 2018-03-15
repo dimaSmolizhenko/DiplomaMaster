@@ -15,5 +15,7 @@
 		public const string CaptchaWordsCount = "captchaWordsCount";
 
 		public const string GenerateFromImagePath = "generateFromImagePath";
+
+		public const string CaptchaIsUseDatabase = "useDatabase";
 	}
 }

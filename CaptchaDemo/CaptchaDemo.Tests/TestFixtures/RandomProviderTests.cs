@@ -2,7 +2,7 @@
 using CaptchaDemo.Core.Services.Impls;
 using NUnit.Framework;
 
-namespace CaptchaDemo.Tests.TextFixtures
+namespace CaptchaDemo.Tests.TestFixtures
 {
 	[TestFixture]
 	public class RandomProviderTests

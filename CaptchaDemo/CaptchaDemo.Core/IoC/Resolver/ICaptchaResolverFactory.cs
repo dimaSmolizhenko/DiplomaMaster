@@ -1,11 +1,11 @@
 ﻿using CaptchaDemo.Core.Services;
 using CaptchaDemo.Data.Enum;
 
-namespace CaptchaDemo.IoC.Resolver
+namespace CaptchaDemo.Core.IoC.Resolver
 {
 	public interface ICaptchaResolverFactory
 	{
 		ICapthcaService GetServiceByType(CaptchaTypes type);
-		T ResolveService<T>();
+		ICaptchaStorageProvider GetStorageProvider(bool isDatabaseAsStorage);
 	}
 }

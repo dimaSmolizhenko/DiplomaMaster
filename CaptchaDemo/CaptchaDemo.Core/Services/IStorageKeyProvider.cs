@@ -9,5 +9,6 @@ namespace CaptchaDemo.Core.Services
 		string GetFileName(string filePath);
 		string GetPDFFilePath();
 		string GetWebFilePath(string captchaType, string fileName);
+		string[] GetFilesFromDirectory(string path);
 	}
 }

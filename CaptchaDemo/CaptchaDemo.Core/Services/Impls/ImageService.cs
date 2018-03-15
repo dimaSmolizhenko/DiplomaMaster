@@ -1,7 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using CaptchaDemo.Core.Models;
+using CaptchaDemo.Data.BussinessModels;
+using CaptchaDemo.Data.Enum;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
@@ -10,14 +13,16 @@ namespace CaptchaDemo.Core.Services.Impls
 		#region Dependencies
 
 		private readonly IStorageKeyProvider _storageKeyProvider;
+		private readonly IRandomProvider _randomProvider;
 
 		#endregion
 
 		#region .ctor
 
-		public ImageService(IStorageKeyProvider storageKeyProvider)
+		public ImageService(IStorageKeyProvider storageKeyProvider, IRandomProvider randomProvider)
 		{
 			_storageKeyProvider = storageKeyProvider;
+			_randomProvider = randomProvider;
 		}
 
 		#endregion
@@ -71,6 +76,34 @@ namespace CaptchaDemo.Core.Services.Impls
 			return _storageKeyProvider.GetFileName(filePath);
 		}
 
+		public PuzzleMathModel CreateImageFromIcon(string imagePath, CapthcaConfig config = null)
+		{
+			if (config == null)
+			{
+				config = new CapthcaConfig
+				{
+					CaptchaType = CaptchaTypes.PuzzleMath.ToString(),
+					BackgroundColor = Color.White
+				};
+			}
+
+			var background = FillBackground(config);
+
+			var imageBitmap = new Bitmap(imagePath);
+
+			var objectCount = DrawImage(background, imageBitmap);
+
+			var filePath = _storageKeyProvider.GetFilePath(config.CaptchaType, ImageFormat.Png);
+
+			SaveImage(background, filePath);
+
+			return new PuzzleMathModel
+			{
+				ImageUrl = _storageKeyProvider.GetFileName(filePath),
+				Answer = objectCount.ToString()
+			};
+		}
+
 		#endregion
 
 		#region Private Methods
@@ -121,9 +154,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 			using (var graphics = Graphics.FromImage(bitmap))
 			{
-				graphics.CompositingQuality = CompositingQuality.AssumeLinear;
-				graphics.SmoothingMode = SmoothingMode.AntiAlias;
-				graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
+				SetGraphicsQuality(graphics);
 
 				var brush = new SolidBrush(config.BackgroundColor);
 				var backRectangle = new Rectangle(0, 0, config.Width, config.Height);
@@ -131,6 +162,41 @@ namespace CaptchaDemo.Core.Services.Impls
 				graphics.FillRectangle(brush, backRectangle);
 			}
 			return bitmap;
+		}
+
+		private int DrawImage(Bitmap background, Bitmap drawImage)
+		{
+			var count = 0;
+			using (var graphics = Graphics.FromImage(background))
+			{
+				SetGraphicsQuality(graphics);
+
+				var marginTop = background.Height / 2 - drawImage.Height > 0 ? _randomProvider.GetRandom(background.Height / 2 - drawImage.Height) : 0;
+				var rows = background.Height / (drawImage.Height + marginTop);
+				var rowMargin = marginTop;
+				for (var i = 0; i < rows; i++)
+				{
+					var marginLeft = background.Width / 2 - drawImage.Width > 0 ? _randomProvider.GetRandom(background.Width / 2 - drawImage.Width) : 0;
+					var colMargin = marginLeft;
+					var columns = background.Width / (drawImage.Width + colMargin);
+					for (var j = 0; j < columns; j++)
+					{
+						graphics.DrawImage(drawImage, colMargin, rowMargin,  drawImage.Width, drawImage.Height);
+						colMargin += marginLeft + drawImage.Width;
+						count++;
+					}
+					rowMargin += marginTop + drawImage.Height;
+				}
+			}
+
+			return count;
+		}
+
+		private void SetGraphicsQuality(Graphics graphics)
+		{
+			graphics.CompositingQuality = CompositingQuality.AssumeLinear;
+			graphics.SmoothingMode = SmoothingMode.AntiAlias;
+			graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
 		}
 
 		#endregion

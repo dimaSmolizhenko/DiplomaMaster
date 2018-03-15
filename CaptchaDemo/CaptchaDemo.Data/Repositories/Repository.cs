@@ -4,6 +4,7 @@ using CaptchaDemo.Configuration;
 using CaptchaDemo.Data.CommonMemebers;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Core.Clusters;
 using MongoDB.Driver.Linq;
 
 namespace CaptchaDemo.Data.Repositories
@@ -24,6 +25,9 @@ namespace CaptchaDemo.Data.Repositories
 			var connectionString = dbConfiguration.GetConnectionString();
 			var connection = new MongoUrlBuilder(connectionString);
 			var client = new MongoClient(connectionString);
+
+			if (client.Cluster.Description.State == ClusterState.Disconnected) { return; }
+
 			var database = client.GetDatabase(connection.DatabaseName);
 
 			var collections = Task.Run(async () => await database.ListCollectionsAsync(new ListCollectionsOptions
@@ -52,6 +56,11 @@ namespace CaptchaDemo.Data.Repositories
 		{
 			var filter = new BsonDocument("Type", type);
 			return await _collection.Find(filter).ToListAsync();
+		}
+
+		public string CreateObjectId()
+		{
+			return ObjectId.GenerateNewId().ToString();
 		}
 
 		public async Task<IEnumerable<T>> GetAllAsync()
