@@ -25,10 +25,15 @@ namespace CaptchaDemo.Data.Repositories
 			var connectionString = dbConfiguration.GetConnectionString();
 			var connection = new MongoUrlBuilder(connectionString);
 			var client = new MongoClient(connectionString);
-
-			if (client.Cluster.Description.State == ClusterState.Disconnected) { return; }
-
 			var database = client.GetDatabase(connection.DatabaseName);
+
+			var isLive = database.RunCommandAsync((Command<BsonDocument>)"{ping:1}")
+				.Wait(1000);
+
+			if (!isLive)
+			{
+				return;
+			}
 
 			var collections = Task.Run(async () => await database.ListCollectionsAsync(new ListCollectionsOptions
 			{
