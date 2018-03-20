@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using CaptchaDemo.Data.Entities;
-using CaptchaDemo.Data.Repositories;
+using CaptchaDemo.Core.Data.Entities;
+using CaptchaDemo.Core.Data.Repositories;
 
 namespace CaptchaDemo.Core.Services.Impls
 {

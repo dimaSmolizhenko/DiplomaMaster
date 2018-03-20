@@ -1,6 +1,6 @@
-﻿using CaptchaDemo.Data.CommonMemebers.Impls;
+﻿using CaptchaDemo.Core.Data.CommonMemebers.Impls;
 
-namespace CaptchaDemo.Data.Entities
+namespace CaptchaDemo.Core.Data.Entities
 {
 	public class Question : Entity
 	{

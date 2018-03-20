@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.Configuration;
+using CaptchaDemo.Core.Data.BussinessModels;
+using CaptchaDemo.Core.Data.Entities;
+using CaptchaDemo.Core.Data.Enum;
 using CaptchaDemo.Core.IoC.Resolver;
-using CaptchaDemo.Data.BussinessModels;
-using CaptchaDemo.Data.Entities;
-using CaptchaDemo.Data.Enum;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
@@ -33,7 +33,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		#region Public Methods
 
-		public bool ValidateCaptchaAsync(string guid, string[] answers)
+		public bool ValidateCaptcha(string guid, string[] answers)
 		{
 			var question = CaptchaStorageProvider.Get(guid);
 
@@ -46,7 +46,7 @@ namespace CaptchaDemo.Core.Services.Impls
 			return isCorrect;
 		}
 
-		public QuestionModel GetCapthaAsync()
+		public QuestionModel GetCaptha()
 		{
 			var directoryPath = _puzzleMathConfiguration.GenerateFromImagePath;
 			var imagePathes = StorageKeyProvider.GetFilesFromDirectory(directoryPath);

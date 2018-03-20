@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.Configuration;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 

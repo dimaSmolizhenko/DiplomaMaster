@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.Configuration;
+using CaptchaDemo.Core.Data.BussinessModels;
+using CaptchaDemo.Core.Data.Entities;
 using CaptchaDemo.Core.IoC.Resolver;
-using CaptchaDemo.Data.BussinessModels;
-using CaptchaDemo.Data.Entities;
 
 namespace CaptchaDemo.Core.Services.Impls
 {

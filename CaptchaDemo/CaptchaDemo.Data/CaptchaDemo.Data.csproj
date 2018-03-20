@@ -62,16 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BussinessModels\PuzzleMathModel.cs" />
-    <Compile Include="BussinessModels\QuestionModel.cs" />
-    <Compile Include="CommonMemebers\Impls\Entity.cs" />
-    <Compile Include="Consts\DbConsts.cs" />
-    <Compile Include="Entities\Question.cs" />
-    <Compile Include="CommonMemebers\IEntity.cs" />
-    <Compile Include="Enum\CaptchaTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CaptchaDemo.Configuration\CaptchaDemo.Configuration.csproj">

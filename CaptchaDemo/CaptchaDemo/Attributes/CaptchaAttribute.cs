@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using CaptchaDemo.Core.Data.Enum;
 using CaptchaDemo.Core.IoC.Resolver;
-using CaptchaDemo.Data.Enum;
 
 namespace CaptchaDemo.Attributes
 {
@@ -21,7 +21,7 @@ namespace CaptchaDemo.Attributes
 				{
 					var captchaResolverFactory = new CaptchaResolverFactory();
 					var captchaService = captchaResolverFactory.GetServiceByType(type);
-					var isValid = captchaService.ValidateCaptchaAsync(guid, captchaWords); 
+					var isValid = captchaService.ValidateCaptcha(guid, captchaWords); 
 					return isValid;
 				}
 

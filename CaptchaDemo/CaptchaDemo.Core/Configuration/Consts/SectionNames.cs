@@ -1,4 +1,4 @@
-﻿namespace CaptchaDemo.Configuration.Consts
+﻿namespace CaptchaDemo.Core.Configuration.Consts
 {
 	public class SectionNames
 	{

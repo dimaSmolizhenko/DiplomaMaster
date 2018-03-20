@@ -1,4 +1,4 @@
-﻿namespace CaptchaDemo.Data.Consts
+﻿namespace CaptchaDemo.Core.Data.Consts
 {
 	public static class DbConsts
 	{

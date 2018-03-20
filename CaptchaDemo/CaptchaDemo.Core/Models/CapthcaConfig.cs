@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using CaptchaDemo.Data.Enum;
+using CaptchaDemo.Core.Data.Enum;
 
 namespace CaptchaDemo.Core.Models
 {

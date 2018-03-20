@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using CaptchaDemo.Core.Data.Entities;
+using CaptchaDemo.Core.Data.Enum;
+using CaptchaDemo.Core.Data.Repositories;
 using CaptchaDemo.Core.Services;
-using CaptchaDemo.Data.Entities;
-using CaptchaDemo.Data.Enum;
-using CaptchaDemo.Data.Repositories;
 using CaptchaDemo.Models;
 
 namespace CaptchaDemo.Controllers
@@ -21,6 +22,18 @@ namespace CaptchaDemo.Controllers
 
 		public ActionResult Index()
 		{
+			//var file = new FileStream(@"E:\uchoba\Diploma\Magister\Software\CapthaMaster\CaptchaDemo\CaptchaDemo\storage\ForPuzzleMath\square.png", FileMode.Open);
+			//var imageId = _repository.SaveFile(file, file.Name);
+			//var question = new Question
+			//{
+			//	ImageUrl = imageId,
+			//	Answers = new[] {"str"},
+			//	Text = "text"
+			//};
+			//Task.Run(async () => await _repository.InsertAsync(question)).Wait();
+
+			//var fileInfo = _repository.GetFile(imageId);
+
 			return View();
 		}
 

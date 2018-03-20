@@ -1,4 +1,4 @@
-﻿namespace CaptchaDemo.Data.Enum
+﻿namespace CaptchaDemo.Core.Data.Enum
 {
 	public enum CaptchaTypes
 	{

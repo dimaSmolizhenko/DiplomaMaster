@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.Configuration;
+using CaptchaDemo.Core.Data.BussinessModels;
+using CaptchaDemo.Core.Data.Entities;
+using CaptchaDemo.Core.Data.Enum;
 using CaptchaDemo.Core.IoC.Resolver;
-using CaptchaDemo.Data.BussinessModels;
-using CaptchaDemo.Data.Entities;
-using CaptchaDemo.Data.Enum;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
@@ -13,7 +13,6 @@ namespace CaptchaDemo.Core.Services.Impls
 	{
 		#region Dependencies
 
-		private readonly ICacheProvider _cacheProvider;
 		private readonly IFileService _fileService;
 		private readonly IImageService _imageService;
 		private readonly IRandomProvider _randomProvider;
@@ -27,7 +26,6 @@ namespace CaptchaDemo.Core.Services.Impls
 			IFileService fileService, ICaptchaConfiguration captchaConfiguration, 
 			ICaptchaResolverFactory captchaResolverFactory) : base(storageKeyProvider, captchaConfiguration, captchaResolverFactory)
 		{
-			_cacheProvider = cacheProvider;
 			_randomProvider = randomProvider;
 			_imageService = imageService;
 			_fileService = fileService;
@@ -37,7 +35,7 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		#region Public Methods
 
-		public bool ValidateCaptchaAsync(string guid, string[] answers)
+		public bool ValidateCaptcha(string guid, string[] answers)
 		{
 			var question = CaptchaStorageProvider.Get(guid);
 
@@ -50,7 +48,7 @@ namespace CaptchaDemo.Core.Services.Impls
 			return isCorrect;
 		}
 
-		public QuestionModel GetCapthaAsync()
+		public QuestionModel GetCaptha()
 		{
 			var words = _fileService.GetWordsFromFile();
 			var captchaText = JoinRandomChars(words);

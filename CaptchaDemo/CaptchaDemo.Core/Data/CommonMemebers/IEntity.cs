@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace CaptchaDemo.Data.CommonMemebers
+namespace CaptchaDemo.Core.Data.CommonMemebers
 {
 	public interface IEntity<T>
 	{

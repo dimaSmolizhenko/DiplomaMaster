@@ -1,9 +1,9 @@
-﻿using CaptchaDemo.Configuration;
+﻿using CaptchaDemo.Core.Configuration;
+using CaptchaDemo.Core.Data.Entities;
+using CaptchaDemo.Core.Data.Enum;
 using CaptchaDemo.Core.IoC.Resolver;
 using CaptchaDemo.Core.Services;
 using CaptchaDemo.Core.Services.Impls;
-using CaptchaDemo.Data.Entities;
-using CaptchaDemo.Data.Enum;
 using Moq;
 using NUnit.Framework;
 
@@ -53,7 +53,7 @@ namespace CaptchaDemo.Tests.TestFixtures
 				mockConfiguration.Object, mockResolver.Object);
 
 			//act
-			var isValid = captchaService.ValidateCaptchaAsync(Id, answers);
+			var isValid = captchaService.ValidateCaptcha(Id, answers);
 
 			//assert
 			Assert.IsTrue(isValid);

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Caching;
-using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.Configuration;
 
 namespace CaptchaDemo.Core.Services.Impls
 {

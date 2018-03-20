@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Drawing.Imaging;
 using System.IO;
-using CaptchaDemo.Configuration;
-using CaptchaDemo.Data.Enum;
+using CaptchaDemo.Core.Configuration;
 
 namespace CaptchaDemo.Core.Services.Impls
 {

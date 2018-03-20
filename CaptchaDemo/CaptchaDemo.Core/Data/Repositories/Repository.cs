@@ -1,19 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
-using CaptchaDemo.Configuration;
-using CaptchaDemo.Data.CommonMemebers;
+using CaptchaDemo.Core.Configuration;
+using CaptchaDemo.Core.Data.CommonMemebers;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Core.Clusters;
+using MongoDB.Driver.GridFS;
 using MongoDB.Driver.Linq;
 
-namespace CaptchaDemo.Data.Repositories
+namespace CaptchaDemo.Core.Data.Repositories
 {
 	public class Repository<T> : IRepository<T> where T: IEntity
 	{
 		#region Dependencies
 
 		private readonly IMongoCollection<T> _collection;
+		private readonly IGridFSBucket _gridFsBucket;
 
 		#endregion
 
@@ -46,6 +49,7 @@ namespace CaptchaDemo.Data.Repositories
 			}
 
 			_collection = database.GetCollection<T>(collectionName);
+			_gridFsBucket = new GridFSBucket(database);
 		}
 
 		#endregion
@@ -93,6 +97,30 @@ namespace CaptchaDemo.Data.Repositories
 		public async Task DeleteAsync(string id)
 		{
 			await _collection.DeleteOneAsync(id);
+		}
+
+		public string SaveFile(Stream stream, string fileName)
+		{
+			var id = CreateObjectId();
+			_gridFsBucket.UploadFromStream(ObjectId.Parse(id), fileName, stream);
+
+			return id;
+		}
+
+		public void SaveFile(string id, Stream stream, string fileName)
+		{
+			_gridFsBucket.UploadFromStream(ObjectId.Parse(id), fileName, stream);
+		}
+
+		public string GetFile(string id)
+		{
+			var fileInfo = _gridFsBucket.Find(id).FirstOrDefault();
+			return fileInfo.Filename;
+		}
+
+		public string GetImage(string id)
+		{
+			return Convert.ToBase64String(_gridFsBucket.DownloadAsBytes(new ObjectId(id)));
 		}
 
 		#endregion

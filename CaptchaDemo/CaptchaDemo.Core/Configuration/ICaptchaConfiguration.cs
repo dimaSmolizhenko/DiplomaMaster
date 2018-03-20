@@ -1,4 +1,4 @@
-﻿namespace CaptchaDemo.Configuration
+﻿namespace CaptchaDemo.Core.Configuration
 {
 	public interface ICaptchaConfiguration
 	{

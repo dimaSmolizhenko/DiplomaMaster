@@ -1,10 +1,10 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
+using CaptchaDemo.Core.Data.BussinessModels;
+using CaptchaDemo.Core.Data.Enum;
 using CaptchaDemo.Core.Models;
-using CaptchaDemo.Data.BussinessModels;
-using CaptchaDemo.Data.Enum;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
@@ -96,6 +96,8 @@ namespace CaptchaDemo.Core.Services.Impls
 			var filePath = _storageKeyProvider.GetFilePath(config.CaptchaType, ImageFormat.Png);
 
 			SaveImage(background, filePath);
+			var memory = new MemoryStream();
+			background.Save(memory, ImageFormat.Png);
 
 			return new PuzzleMathModel
 			{

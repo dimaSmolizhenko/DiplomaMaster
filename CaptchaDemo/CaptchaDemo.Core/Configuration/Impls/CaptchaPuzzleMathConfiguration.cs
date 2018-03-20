@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
-using CaptchaDemo.Configuration.Consts;
+using CaptchaDemo.Core.Configuration.Consts;
 
-namespace CaptchaDemo.Configuration.Impls
+namespace CaptchaDemo.Core.Configuration.Impls
 {
 	public class CaptchaPuzzleMathConfiguration : ConfigurationSection, ICaptchaPuzzleMathConfiguration
 	{

@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using CaptchaDemo.Core.Data.BussinessModels;
+using CaptchaDemo.Core.Data.Enum;
 using CaptchaDemo.Core.IoC.Resolver;
-using CaptchaDemo.Data.BussinessModels;
-using CaptchaDemo.Data.Enum;
 
 namespace CaptchaDemo.HtmlHlper
 {
@@ -92,7 +92,7 @@ namespace CaptchaDemo.HtmlHlper
 		{
 			var captchaResolverFactory = new CaptchaResolverFactory();
 			var captchaService = captchaResolverFactory.GetServiceByType(type);
-			var question = captchaService.GetCapthaAsync();
+			var question = captchaService.GetCaptha();
 
 			return question;
 		}

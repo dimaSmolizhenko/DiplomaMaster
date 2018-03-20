@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using CaptchaDemo.Core.Data.Enum;
 using CaptchaDemo.Core.Services;
-using CaptchaDemo.Data.Enum;
 
 namespace CaptchaDemo.Core.IoC.Resolver
 {

@@ -1,4 +1,4 @@
-﻿namespace CaptchaDemo.Data.BussinessModels
+﻿namespace CaptchaDemo.Core.Data.BussinessModels
 {
 	public class QuestionModel
 	{

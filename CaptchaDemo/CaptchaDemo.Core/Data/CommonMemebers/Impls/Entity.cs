@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace CaptchaDemo.Data.CommonMemebers.Impls
+namespace CaptchaDemo.Core.Data.CommonMemebers.Impls
 {
 	public class Entity : IEntity
 	{

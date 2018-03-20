@@ -3,16 +3,16 @@ using System.Configuration;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using CaptchaDemo.Configuration;
-using CaptchaDemo.Configuration.Consts;
-using CaptchaDemo.Configuration.Impls;
+using CaptchaDemo.Core.Configuration;
+using CaptchaDemo.Core.Configuration.Consts;
+using CaptchaDemo.Core.Configuration.Impls;
+using CaptchaDemo.Core.Data.Consts;
+using CaptchaDemo.Core.Data.Entities;
+using CaptchaDemo.Core.Data.Enum;
+using CaptchaDemo.Core.Data.Repositories;
 using CaptchaDemo.Core.IoC.Resolver;
 using CaptchaDemo.Core.Services;
 using CaptchaDemo.Core.Services.Impls;
-using CaptchaDemo.Data.Consts;
-using CaptchaDemo.Data.Entities;
-using CaptchaDemo.Data.Enum;
-using CaptchaDemo.Data.Repositories;
 
 namespace CaptchaDemo.Core.IoC
 {

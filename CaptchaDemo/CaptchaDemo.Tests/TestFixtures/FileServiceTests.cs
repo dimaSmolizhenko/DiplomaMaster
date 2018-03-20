@@ -1,4 +1,4 @@
-﻿using CaptchaDemo.Configuration;
+﻿using CaptchaDemo.Core.Configuration;
 using CaptchaDemo.Core.Services;
 using CaptchaDemo.Core.Services.Impls;
 using Moq;

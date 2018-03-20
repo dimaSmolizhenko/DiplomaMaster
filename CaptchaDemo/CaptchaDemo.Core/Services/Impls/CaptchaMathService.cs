@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using CaptchaDemo.Configuration;
+using CaptchaDemo.Core.Configuration;
+using CaptchaDemo.Core.Data.BussinessModels;
+using CaptchaDemo.Core.Data.Entities;
+using CaptchaDemo.Core.Data.Enum;
+using CaptchaDemo.Core.Data.Repositories;
 using CaptchaDemo.Core.IoC.Resolver;
-using CaptchaDemo.Data.BussinessModels;
-using CaptchaDemo.Data.Entities;
-using CaptchaDemo.Data.Enum;
-using CaptchaDemo.Data.Repositories;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
@@ -20,14 +20,14 @@ namespace CaptchaDemo.Core.Services.Impls
 			_randomProvider = randomProvider;
 		}
 
-		public bool ValidateCaptchaAsync(string guid, string[] answers)
+		public bool ValidateCaptcha(string guid, string[] answers)
 		{
 			var question = Task.Run(async () => await _repository.GetByIdAsync(guid)).Result;
 
 			return ContainsAll(question.Answers, answers);
 		}
 
-		public QuestionModel GetCapthaAsync()
+		public QuestionModel GetCaptha()
 		{
 			var questions = Task.Run(async () => await _repository.GetByTypeAsync(CaptchaTypes.RebusMath.ToString())).Result;
 			var randomNumber = _randomProvider.GetRandom(questions.Count);

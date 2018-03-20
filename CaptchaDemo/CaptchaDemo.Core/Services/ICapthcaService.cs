@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
-using CaptchaDemo.Data.BussinessModels;
+﻿using CaptchaDemo.Core.Data.BussinessModels;
 
 namespace CaptchaDemo.Core.Services
 {
 	public interface ICapthcaService
 	{
-		bool ValidateCaptchaAsync(string guid, string[] answers);
-		QuestionModel GetCapthaAsync();
+		bool ValidateCaptcha(string guid, string[] answers);
+		QuestionModel GetCaptha();
 	}
 }

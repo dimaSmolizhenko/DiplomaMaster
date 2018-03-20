@@ -1,4 +1,4 @@
-﻿using CaptchaDemo.Data.Entities;
+﻿using CaptchaDemo.Core.Data.Entities;
 
 namespace CaptchaDemo.Core.Services
 {

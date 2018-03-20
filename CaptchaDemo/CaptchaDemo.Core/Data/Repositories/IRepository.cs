@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
-namespace CaptchaDemo.Data.Repositories
+namespace CaptchaDemo.Core.Data.Repositories
 {
 	public interface IRepository<T>
 	{
@@ -13,5 +14,8 @@ namespace CaptchaDemo.Data.Repositories
 		Task DeleteAsync(string id);
 		Task<IList<T>> GetByTypeAsync(string type);
 		string CreateObjectId();
+		string SaveFile(Stream stream, string fileName);
+		void SaveFile(string id, Stream stream, string fileName);
+		string GetFile(string id);
 	}
 }

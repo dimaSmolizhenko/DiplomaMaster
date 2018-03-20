@@ -1,5 +1,5 @@
-﻿using CaptchaDemo.Core.Services;
-using CaptchaDemo.Data.Enum;
+﻿using CaptchaDemo.Core.Data.Enum;
+using CaptchaDemo.Core.Services;
 
 namespace CaptchaDemo.Core.IoC.Resolver
 {

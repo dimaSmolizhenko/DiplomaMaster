@@ -1,5 +1,5 @@
-﻿using CaptchaDemo.Core.Models;
-using CaptchaDemo.Data.BussinessModels;
+﻿using CaptchaDemo.Core.Data.BussinessModels;
+using CaptchaDemo.Core.Models;
 
 namespace CaptchaDemo.Core.Services
 {
