@@ -4,7 +4,7 @@ using System.Web;
 using CaptchaDemo.Core.Data.Enum;
 using CaptchaDemo.Core.IoC.Resolver;
 
-namespace CaptchaDemo.Attributes
+namespace CaptchaDemo.Core.Web.Attributes
 {
 	public class CaptchaAttribute : ValidationAttribute
 	{

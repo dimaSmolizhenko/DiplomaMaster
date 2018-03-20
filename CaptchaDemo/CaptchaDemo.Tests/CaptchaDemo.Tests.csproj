@@ -67,17 +67,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CaptchaDemo.Configuration\CaptchaDemo.Configuration.csproj">
-      <Project>{3a2f8464-b142-4240-9ad5-029d3b95fa60}</Project>
-      <Name>CaptchaDemo.Configuration</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CaptchaDemo.Core\CaptchaDemo.Core.csproj">
       <Project>{dbddc2ce-2929-4a90-aaee-ba09f6e1951e}</Project>
       <Name>CaptchaDemo.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CaptchaDemo.Data\CaptchaDemo.Data.csproj">
-      <Project>{c4c9ca79-870c-4408-a89b-34809932dfbe}</Project>
-      <Name>CaptchaDemo.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

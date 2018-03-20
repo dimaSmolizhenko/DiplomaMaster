@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo", "CaptchaDemo\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo.Core", "CaptchaDemo.Core\CaptchaDemo.Core.csproj", "{DBDDC2CE-2929-4A90-AAEE-BA09F6E1951E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo.Data", "CaptchaDemo.Data\CaptchaDemo.Data.csproj", "{C4C9CA79-870C-4408-A89B-34809932DFBE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo.Configuration", "CaptchaDemo.Configuration\CaptchaDemo.Configuration.csproj", "{3A2F8464-B142-4240-9AD5-029D3B95FA60}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDemo.Tests", "CaptchaDemo.Tests\CaptchaDemo.Tests.csproj", "{659BD604-76F1-43E9-A02D-0C896F382B48}"
 EndProject
 Global
@@ -27,14 +23,6 @@ Global
 		{DBDDC2CE-2929-4A90-AAEE-BA09F6E1951E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBDDC2CE-2929-4A90-AAEE-BA09F6E1951E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBDDC2CE-2929-4A90-AAEE-BA09F6E1951E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4C9CA79-870C-4408-A89B-34809932DFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4C9CA79-870C-4408-A89B-34809932DFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4C9CA79-870C-4408-A89B-34809932DFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4C9CA79-870C-4408-A89B-34809932DFBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A2F8464-B142-4240-9AD5-029D3B95FA60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A2F8464-B142-4240-9AD5-029D3B95FA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A2F8464-B142-4240-9AD5-029D3B95FA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A2F8464-B142-4240-9AD5-029D3B95FA60}.Release|Any CPU.Build.0 = Release|Any CPU
 		{659BD604-76F1-43E9-A02D-0C896F382B48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{659BD604-76F1-43E9-A02D-0C896F382B48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{659BD604-76F1-43E9-A02D-0C896F382B48}.Release|Any CPU.ActiveCfg = Release|Any CPU

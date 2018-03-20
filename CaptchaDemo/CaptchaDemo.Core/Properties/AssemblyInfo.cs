@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CaptchaDemo.Core")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("CaptchaFeatured")]
+[assembly: AssemblyDescription("MVC captcha library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("d.smolizhenko")]
 [assembly: AssemblyProduct("CaptchaDemo.Core")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

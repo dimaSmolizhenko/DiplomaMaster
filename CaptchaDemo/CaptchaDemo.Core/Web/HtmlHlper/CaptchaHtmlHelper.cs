@@ -7,7 +7,7 @@ using CaptchaDemo.Core.Data.BussinessModels;
 using CaptchaDemo.Core.Data.Enum;
 using CaptchaDemo.Core.IoC.Resolver;
 
-namespace CaptchaDemo.HtmlHlper
+namespace CaptchaDemo.Core.Web.HtmlHlper
 {
 	public static class CaptchaHtmlHelper
 	{

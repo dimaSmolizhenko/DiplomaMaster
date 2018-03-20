@@ -1,5 +1,4 @@
 ﻿using CaptchaDemo.Core.Data.BussinessModels;
-using CaptchaDemo.Core.Models;
 
 namespace CaptchaDemo.Core.Services
 {

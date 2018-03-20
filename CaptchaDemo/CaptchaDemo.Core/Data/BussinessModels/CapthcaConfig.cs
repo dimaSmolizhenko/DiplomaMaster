@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using CaptchaDemo.Core.Data.Enum;
 
-namespace CaptchaDemo.Core.Models
+namespace CaptchaDemo.Core.Data.BussinessModels
 {
 	public class CapthcaConfig
 	{

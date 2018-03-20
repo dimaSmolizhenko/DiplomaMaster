@@ -17,3 +17,8 @@ CaptchaDemo/CaptchaDemo.IoC/bin/
 CaptchaDemo/CaptchaDemo.IoC/obj/
 CaptchaDemo/CaptchaDemo.Tests/obj/
 CaptchaDemo/CaptchaDemo.Tests/bin/
+CaptchaDemo/packages/NuGet.CommandLine.4.5.1/tools/NuGet.exe
+CaptchaDemo/packages/NuGet.CommandLine.4.5.1/NuGet.CommandLine.4.5.1.nupkg
+CaptchaDemo/CaptchaDemo.Core/nuget.exe
+CaptchaDemo/CaptchaDemo.Core/CaptchaFeatured.1.0.0.nupkg
+CaptchaDemo/CaptchaDemo.Core/CaptchaDemo.Core.nuspec

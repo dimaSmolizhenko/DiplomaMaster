@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using CaptchaDemo.Core.Data.BussinessModels;
 using CaptchaDemo.Core.Data.Enum;
-using CaptchaDemo.Core.Models;
 
 namespace CaptchaDemo.Core.Services.Impls
 {
