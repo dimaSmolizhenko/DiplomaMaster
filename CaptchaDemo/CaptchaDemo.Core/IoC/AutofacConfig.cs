@@ -36,6 +36,7 @@ namespace CaptchaDemo.Core.IoC
 			builder.RegisterType<GameWordsService>().Keyed<ICapthcaService>(CaptchaTypes.GameWords);
 			builder.RegisterType<CaptchaMathService>().Keyed<ICapthcaService>(CaptchaTypes.RebusMath);
 			builder.RegisterType<CaptchaPuzzleMathService>().Keyed<ICapthcaService>(CaptchaTypes.PuzzleMath);
+			builder.RegisterType<CaptchaRebusService>().Keyed<ICapthcaService>(CaptchaTypes.Rebus);
 
 			builder.RegisterType<CacheStorageProvider>().Keyed<ICaptchaStorageProvider>(false);
 			builder.RegisterType<DatabaseStorageProvider>().Keyed<ICaptchaStorageProvider>(true);

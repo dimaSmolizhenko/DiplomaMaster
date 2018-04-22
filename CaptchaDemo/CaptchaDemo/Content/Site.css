@@ -34,3 +34,43 @@ textarea {
 .captcha-image.type-math {
 	width: 500px;
 }
+
+.game-field {
+	width: 300px;
+}
+
+.game-field-2 {
+	height: 200px;
+}
+
+.game-field-3 {
+	height: 300px;
+}
+
+.game-field-4 {
+	height: 400px;
+}
+
+.game-field-5 {
+	height: 500px;
+}
+
+.field-row {
+	height: 100px;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.field-column {
+	height: 100%;
+	width: 30%;
+	display: -webkit-inline-box;
+}
+
+.field-column__start {
+	float: left;
+}
+
+.field-column__end {
+	float: right;
+}

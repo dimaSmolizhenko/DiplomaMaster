@@ -26,10 +26,12 @@
 	<div class="form-group">
 		@Html.LabelFor(m => m.Captcha)
 
-		@Html.CaptchaFor(m => m.Captcha, CaptchaTypes.GameWords, new { @class = "form-control captcha-text-field" })
+		@Html.CaptchaFor(m => m.Captcha, CaptchaTypes.Rebus, new { @class = "form-control captcha-text-field" })
 
 		@Html.ValidationMessageFor(m => m.Captcha)
 	</div>
 
 	<button class="btn btn-info">Send</button>
 }
+
+<script src="~/Scripts/drawFigureCaptcha.js"></script>

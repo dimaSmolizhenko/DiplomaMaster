@@ -1,7 +1,34 @@
 ﻿@{
-    ViewBag.Title = "About";
+	ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+@Scripts.Render("~/bundles/jquery")
+
+<div class='game-field'>
+	<div class='field-row'>
+		<div class='field-column field-column__start'>
+			<canvas id='figure-rectangle'></canvas>
+		</div>
+		<div class='field-column field-column__end'>
+			<canvas id='figure-rectangle-bord'></canvas>
+		</div>
+	</div>
+	<div class='field-row'>
+		<div class='field-column field-column__start'>
+			<canvas id='figure-round'></canvas>
+		</div>
+		<div class='field-column field-column__end'>
+			<canvas id='figure-round-bord'></canvas>
+		</div>
+	</div>
+	<div class='field-row'>
+		<div class='field-column field-column__start'>
+			<canvas id='figure-rhomb'></canvas>
+		</div>
+		<div class='field-column field-column__end'>
+			<canvas id='figure-rhomb-bord'></canvas>
+		</div>
+	</div>
+</div>
+
+<script src="~/Scripts/drawFigureCaptcha.js"></script>

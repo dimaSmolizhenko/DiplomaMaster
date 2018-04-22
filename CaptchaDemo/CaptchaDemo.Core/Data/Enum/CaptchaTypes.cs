@@ -4,6 +4,7 @@
 	{
 		GameWords = 1,
 		RebusMath = 2,
-		PuzzleMath = 3
+		PuzzleMath = 3,
+		Rebus = 4,
 	}
 }

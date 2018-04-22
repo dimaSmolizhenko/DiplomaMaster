@@ -21,9 +21,9 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		#region .ctor
 
-		public GameWordsService(ICacheProvider cacheProvider, IStorageKeyProvider storageKeyProvider, 
-			IRandomProvider randomProvider, IImageService imageService, 
-			IFileService fileService, ICaptchaConfiguration captchaConfiguration, 
+		public GameWordsService(ICacheProvider cacheProvider, IStorageKeyProvider storageKeyProvider,
+			IRandomProvider randomProvider, IImageService imageService,
+			IFileService fileService, ICaptchaConfiguration captchaConfiguration,
 			ICaptchaResolverFactory captchaResolverFactory) : base(storageKeyProvider, captchaConfiguration, captchaResolverFactory)
 		{
 			_randomProvider = randomProvider;
@@ -35,17 +35,22 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		#region Public Methods
 
-		public bool ValidateCaptcha(string guid, string[] answers)
+		public bool ValidateCaptcha(string guid, string answer)
 		{
-			var question = CaptchaStorageProvider.Get(guid);
-
-			var isCorrect = question != null && ContainsAll(question.Answers, answers);
-			if (isCorrect)
+			var answers = answer.Split(' ');
+			if (answer.Any())
 			{
-				CaptchaStorageProvider.Delete(guid);
-			}
+				var question = CaptchaStorageProvider.Get(guid);
 
-			return isCorrect;
+				var isCorrect = question != null && ContainsAll(question.Answers, answers);
+				if (isCorrect)
+				{
+					CaptchaStorageProvider.Delete(guid);
+				}
+
+				return isCorrect;
+			}
+			return false;
 		}
 
 		public QuestionModel GetCaptha()

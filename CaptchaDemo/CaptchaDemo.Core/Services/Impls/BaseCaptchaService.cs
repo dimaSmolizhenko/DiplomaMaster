@@ -28,7 +28,7 @@ namespace CaptchaDemo.Core.Services.Impls
 				Text = question.Text,
 				Type = question.Type,
 				Answers = question.Answers.Select(x => x).ToArray(),
-				ImageUrl = StorageKeyProvider.GetWebFilePath(question.Type, question.ImageUrl)
+				ImageUrl = !string.IsNullOrEmpty(question.ImageUrl) ? StorageKeyProvider.GetWebFilePath(question.Type, question.ImageUrl) : null
 			};
 		}
 

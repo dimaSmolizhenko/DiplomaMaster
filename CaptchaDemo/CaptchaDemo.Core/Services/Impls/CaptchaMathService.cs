@@ -20,8 +20,9 @@ namespace CaptchaDemo.Core.Services.Impls
 			_randomProvider = randomProvider;
 		}
 
-		public bool ValidateCaptcha(string guid, string[] answers)
+		public bool ValidateCaptcha(string guid, string answer)
 		{
+			var answers = answer.Split(' ');
 			var question = Task.Run(async () => await _repository.GetByIdAsync(guid)).Result;
 
 			return ContainsAll(question.Answers, answers);

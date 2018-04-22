@@ -12,19 +12,18 @@ namespace CaptchaDemo.Core.Web.Attributes
 		{
 			if (value != null)
 			{
-				var captchaWords = value.ToString().Split(' ');
+				var captchaAnswer = value.ToString();
 				var context = HttpContext.Current; //TODO: to sessionProvider
 				var guid = context.Session["CaptchaGuid"].ToString();
 				var type = (CaptchaTypes)context.Session["CaptchaType"];
 
-				if (captchaWords.Any() && !string.IsNullOrEmpty(guid))
+				if (!string.IsNullOrEmpty(captchaAnswer) && !string.IsNullOrEmpty(guid))
 				{
 					var captchaResolverFactory = new CaptchaResolverFactory();
 					var captchaService = captchaResolverFactory.GetServiceByType(type);
-					var isValid = captchaService.ValidateCaptcha(guid, captchaWords); 
+					var isValid = captchaService.ValidateCaptcha(guid, captchaAnswer); 
 					return isValid;
 				}
-
 			}
 			return false;
 		}

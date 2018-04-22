@@ -4,7 +4,7 @@ namespace CaptchaDemo.Core.Services
 {
 	public interface ICapthcaService
 	{
-		bool ValidateCaptcha(string guid, string[] answers);
+		bool ValidateCaptcha(string guid, string answer);
 		QuestionModel GetCaptha();
 	}
 }

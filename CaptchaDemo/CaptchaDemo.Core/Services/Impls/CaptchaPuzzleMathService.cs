@@ -33,11 +33,11 @@ namespace CaptchaDemo.Core.Services.Impls
 
 		#region Public Methods
 
-		public bool ValidateCaptcha(string guid, string[] answers)
+		public bool ValidateCaptcha(string guid, string answer)
 		{
 			var question = CaptchaStorageProvider.Get(guid);
 
-			var isCorrect = question != null && ContainsAll(question.Answers, answers);
+			var isCorrect = question != null && question.Answers.Contains(answer);
 			if (isCorrect)
 			{
 				CaptchaStorageProvider.Delete(guid);

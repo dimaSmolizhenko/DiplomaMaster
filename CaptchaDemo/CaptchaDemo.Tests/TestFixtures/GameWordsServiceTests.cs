@@ -27,12 +27,12 @@ namespace CaptchaDemo.Tests.TestFixtures
 		public void ValidateCaptcha_AnswerOneWord_IsValid()
 		{
 			//arrange
-			var answers = new[] {"answer"};
+			var answer = "answer";
 
 			var question = new Question
 			{
 				Id = Id,
-				Answers = answers,
+				Answers = new[] { answer },
 				ImageUrl = "url",
 				Text = "question",
 				Type = CaptchaTypes.GameWords.ToString()
@@ -53,7 +53,7 @@ namespace CaptchaDemo.Tests.TestFixtures
 				mockConfiguration.Object, mockResolver.Object);
 
 			//act
-			var isValid = captchaService.ValidateCaptcha(Id, answers);
+			var isValid = captchaService.ValidateCaptcha(Id, answer);
 
 			//assert
 			Assert.IsTrue(isValid);
